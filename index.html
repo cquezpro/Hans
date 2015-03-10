@@ -1,0 +1,341 @@
+<!--Copyright by: Matthias Zubke, 75196 Remchingen, Germany-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hans</title>
+    <meta charset="utf-8"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <!-- WARNING: for iOS 7, remove the width=device-width and    height=device-height attributes. 
+	See  https://issues.apache.org/jira/browse/CB-4323 -->
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1"/>
+
+    <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+    <META HTTP-EQUIV="Expires" CONTENT="-1">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+	<link rel="stylesheet" href="css/jqm-icon-pack-fa.css">	
+	<link rel="stylesheet" href="css/style.css">
+	<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+	<script src="js/lang.js"></script>
+	<script src="js/main.js"></script>
+</head>
+<body>
+
+<!-- ######################### Home Page ########################### -->
+<div data-role="page" id="home" data-theme="a">
+    <!-- Header -->
+    <div data-role="header" data-position="fixed" style="height: 50px;">
+        <div class="ui-btn-left">
+			<a class="emergBtn vEmergency" data-role="button"  href="#" data-icon="alert" data-iconpos="left">
+			Emerg.
+			</a>
+		</div>
+		<div class="ui-btn-right" data-role="controlgroup" data-type="horizontal" style="margin:5px 0 10px 0;" >
+		  <a href="#input" class="vInput" data-role="button" data-icon="arrow-l" >Input</a>
+		  <a href="#" class="vEvaluation" data-role="button" data-icon="arrow-r" data-iconpos="right">Evaluation</a>
+		</div>
+    </div>
+    <!-- main content-->
+    <div role="main" class="ui-content" style="padding:0px;margin: 0px;">
+		<ul data-role="listview" data-inset="true" data-divider-theme="a">
+			<li data-role="list-divider" class="vHome">Home</li>
+		    <li>
+		    	<a href="#">
+		    		<div>
+		    			<span class="vGoalDay">Goal of the day:</span>
+						<p class="subtext">This is good because it doe not run out of screen because shows the three dots</p>
+		    		</div>
+		    	</a>
+		    </li>
+		    <li>
+		    	<a href="#">
+		    		<div >
+		    			<span class="vGoalWeek">Goal of week:</span>
+						<p class="subtext">This text is flexible content and will be up to a long text  </p>
+		    		</div>
+		    	</a>
+		    </li>
+		    <li>
+		    	<a href="#">
+		    		<span class="vTraining">Training</span>
+		    	</a>
+		    </li>
+		    <li>
+		    	<a href="#">
+		    		<span class="vHelp">Help</span>
+		    	</a>
+		    </li>
+		    <li>
+		    	<a href="#options" data-role="button" data-icon="bars" data-iconpos="right">
+		    		<span class="vOptions">Options</span>
+		    	</a>
+		    </li>
+		</ul>		
+    </div>
+</div>
+
+<!-- ######################### Options Page ########################### -->
+<div data-role="page" id="options" data-theme="a">
+    <!-- Header -->
+    <div data-role="header" data-position="fixed" style="height: 50px;">
+        <div class="ui-btn-left">
+			<a style="margin:5px 0 10px 0;" data-role="button"  href="#home" data-icon="arrow-l" data-iconpos="left">
+			Home
+			</a>
+		</div>
+		<div class="ui-btn-right" data-role="controlgroup" data-type="horizontal" style="margin:5px 0 10px 0;" >
+		  <a href="#" class="vTraining" data-role="button" data-icon="arrow-l" >Training</a>
+		  <a href="#" class="vEvaluation" data-role="button" data-icon="arrow-r" data-iconpos="right">Evaluation</a>
+		</div>
+    </div>
+    <!-- main content-->
+    <div role="main" class="ui-content" style="padding:0px;margin: 0px;">
+		<ul data-role="listview" data-inset="true" data-divider-theme="a">
+		    <li class="vOptions" data-role="list-divider">Options</li>
+		    <li>
+		    	<span class="title vMedicine">Medicine</span>
+		    	<input class="flip" type="checkbox" data-role="flipswitch"  checked="" data-mini="true">
+		    </li>
+		    <li class="noborder">
+		    	<div class="title1 vNumber">Number</div>
+		    	<span class="number">
+		    		<input type="number" value="3" />
+		    	</span>
+		    </li>
+		    <li>
+		    	<span class="title vBloodPressure">Blood pressure</span>
+		    	<input class="flip" type="checkbox" data-role="flipswitch" data-mini="true">
+		    </li>
+		    <li class="noborder">
+		    	<div class="title1 vNumber">Number</div>
+		    	<span class="number">
+		    		<input type="number" value="3" />
+		    	</span>
+		    </li>
+		    <li>
+		    	<span class="title vBloodSugar">Blood sugar</span>
+		    	<input class="flip" type="checkbox" data-role="flipswitch" data-mini="true">
+		    </li>
+		    <li class="noborder">
+		    	<div class="title1 vNumber">Number</div>
+		    	<span class="number">
+		    		<input type="number" value="3" />
+		    	</span>
+		    </li>
+		    <li>
+		    	<span class="title vInsulinMeasure">Insulin measurement</span>
+		    	<input class="flip" type="checkbox" data-role="flipswitch" data-mini="true">
+		    </li>
+		    <li class="noborder">
+		    	<div class="title1 vNumber">Number</div>
+		    	<span class="number">
+		    		<input type="number" value="3" />
+		    	</span>
+		    </li>
+		    <li>
+		    	<span class="title vNeverDrinkAlc">I never drink alcohol</span>
+		    	<input class="flip" type="checkbox" data-role="flipswitch"  checked="" data-mini="true">
+		    </li>
+		    <li>
+		    	<a class="changelang" href="#" data-role="button" data-icon="flag">
+		    		<span class="vLanguage">Language:</span>
+		    		<select id="multilang">
+		    			<option value="0">English</option>
+		    			<option value="1">Deutsch</option>
+		    		</select>
+		    		<!--<span class="lang">english</span>-->
+		    	</a>
+		    </li>
+		    <li>
+		    	<a href="#">
+		    		Date format:<span class="dateformat">dd/mm/yy</span>
+		    	</a>
+		    </li>
+		    <li>
+		    	<a href="#">
+		    		<span class="vWeight">Weight</span>
+		    		 unit:<span class="unit">kg</span>
+		    	</a>
+		    </li>
+		</ul>		
+    </div>
+</div>
+
+<!-- ######################### Input Page ########################### -->
+<div data-role="page" id="input" data-theme="a">
+    <!-- Header -->
+    <div data-role="header" data-position="fixed" style="height: 50px;">
+        <div class="ui-btn-left">
+			<a style="margin:5px 0 10px 0;" data-role="button"  href="#home" data-icon="arrow-l" data-iconpos="left">
+			Home
+			</a>
+		</div>
+		<div class="ui-btn-right" data-role="controlgroup" data-type="horizontal" style="margin:5px 0 10px 0;" >
+		  <a href="#" class="vTraining" data-role="button" data-icon="arrow-l" >Training</a>
+		  <a href="#" class="vEvaluation" data-role="button" data-icon="arrow-r" data-iconpos="right">Evaluation</a>
+		</div>
+    </div>
+    <!-- main content-->
+    <div role="main" class="ui-content" style="padding:0px;margin: 0px;">
+		<ul data-role="listview" data-inset="true" style="padding:0px;margin: 0px;border-radius: 0px;border: none;">
+			<li>
+			  <a href="index.html">
+				<h2 style="text-align:left;font-style:italic">
+					<span class="title">Mo. </span>
+					<span class="date">15.09.2014</span>
+				</h2>
+				<p>
+					<span class="vLastMeal">Last meal: </span>
+					<span class="vLunch">Lunch</span>
+				</p>
+			  </a>
+			</li>
+			<li>
+				<div data-role="navbar">
+					<ul>
+						<li>	
+							<a id="meanbtn" href="index.html" onclick="alert('coming soon!');">
+								<span class="vMeal">Meal</span>
+							</a>
+						</li>
+					    <!-- drink for future use-->
+						<!-- <li>
+							<a id="meanbtn" href="index.html" onclick="alert('coming soon!')">
+								<span class="vDrinks">Drinks</span>
+						    </a>
+						</li> -->
+					</ul>
+				</div>
+			</li>
+			<li style="padding: 20px;">
+				<div class="ui-btn-left">
+					<h2 class="vDrinking">Drinking</h2>
+				</div>
+				<div class="ui-btn-right" style="right: 105px;top:10px">
+					<div data-role="controlgroup" data-type="horizontal">
+						<!--<label data-iconpos="notext">  
+							<input type='checkbox' />  
+						</label>  -->
+						<input class="chkbox" type="checkbox" style="margin-left:20px;"/>
+						<input type="checkbox" style="margin-left:50px;"/>
+						<input type="checkbox" style="margin-left:80px;"/>
+					</div>
+				</div>
+			</li>
+			<li style="padding: 20px;">
+				<div class="ui-btn-left">
+					<h2 class="vFruit">Fruit</h2>
+				</div>
+				<div class="ui-btn-right" style="right: 105px;top:10px">
+					<div data-role="controlgroup" data-type="horizontal">
+						<input type="checkbox" style="margin-left:20px;"/>
+						<input type="checkbox" style="margin-left:50px;"/>
+						<input type="checkbox" style="margin-left:80px;"/>
+					</div>
+				</div>
+			</li>
+			<li style="padding: 20px;">
+				<div class="ui-btn-left">
+					<h2 class="vVegetable">Vegetable</h2>
+				</div>
+				<div class="ui-btn-right" style="right: 105px;top:10px">
+					<div data-role="controlgroup" data-type="horizontal">
+						<input type="checkbox" style="margin-left:20px;"/>
+						<input type="checkbox" style="margin-left:50px;"/>
+						<input type="checkbox" style="margin-left:80px;"/>
+					</div>
+				</div>
+			</li>
+			<li style="padding: 20px;">
+				<div class="ui-btn-left">
+					<h2 class="vExercize">Exercise</h2>
+				</div>
+				<div class="ui-btn-right" style="right: 105px;top:10px">
+					<div data-role="controlgroup" data-type="horizontal">
+						<input type="checkbox" style="margin-left:20px;"/>
+						<input type="checkbox" style="margin-left:50px;"/>
+						<input type="checkbox" style="margin-left:80px;"/>
+					</div>
+				</div>
+			</li>
+			<li style="padding: 20px;">
+				<div class="ui-btn-left">
+					<h2 class="vMedicine">Medicine</h2>
+				</div>
+				<div class="ui-btn-right" style="right: 105px;top:10px">
+					<div data-role="controlgroup" data-type="horizontal">
+						<input type="checkbox" style="margin-left:20px;"/>
+						<input type="checkbox" style="margin-left:50px;"/>
+						<input type="checkbox" style="margin-left:80px;"/>
+					</div>
+				</div>
+			</li>
+			<li style="padding: 20px;">
+				<div class="ui-btn-left">
+					<h2 class="vBloodPressure">Blood pressure</h2>
+				</div>
+				<div class="ui-btn-right" style="right: 105px;top:10px">
+					<div data-role="controlgroup" data-type="horizontal">
+						<input type="checkbox" style="margin-left:20px;"/>
+						<input type="checkbox" style="margin-left:50px;"/>
+						<input type="checkbox" style="margin-left:80px;"/>
+					</div>
+				</div>
+			</li>
+			<li style="padding: 20px;">
+				<div class="ui-btn-left">
+					<h2 style="float:left;" class="vBloodSugar">Blood sugar</h2>
+					<a href="#" class="ui-btn ui-shadow ui-corner-all ui-icon-info ui-btn-icon-notext" style="margin-left: 100px;" onclick="alert('coming soon!');">info</a>
+				</div>
+				<div class="ui-btn-right" style="right: 105px;top:10px">
+					<div data-role="controlgroup" data-type="horizontal">						
+						<input type="checkbox" style="margin-left:50px;"/>
+						<input type="checkbox" style="margin-left:80px;"/>
+					</div>
+				</div>
+			</li>
+			<li style="padding: 20px;">
+				<div class="ui-btn-left">
+					<h2 class="vInsulin">Insulin</h2>
+				</div>
+				<div class="ui-btn-right" style="right: 105px;top:10px">
+					<div data-role="controlgroup" data-type="horizontal">
+						<input type="checkbox" style="margin-right:20px;"/>
+						<input type="checkbox" style="margin-left:20px;"/>
+						<input type="checkbox" style="margin-left:50px;"/>
+						<input type="checkbox" style="margin-left:80px;"/>
+					</div>
+				</div>
+			</li>
+			<li>
+				<a style="padding:0px;background: white;">
+					<button class="ui-btn ui-shadow ui-corner-all ui-icon-check ui-btn-icon-notext" style="margin-right: 10px;float:left;">
+						check
+					</button>
+					<h2 style="float:left;margin-top: 15px;" class="vDailynote">Daily Note</h2>
+				</a>
+			</li>
+			<li class="weight">
+				<a style="padding:0px;background:white;">
+					<button class="ui-btn ui-shadow ui-corner-all ui-icon-check ui-btn-icon-notext" style="margin-right: 10px;float:left;">
+						check
+					</button>
+					<h2 style="margin-top: 15px;" class="vWeight">Weight</h2>
+					<p id="weight">132.5kg</p>
+				</a>
+			</li>
+			<li>
+				<a style="padding:5px;background: white;">
+					<h2 style="float:left;margin-top: 15px;" class="vCompleteDay">Complete the day</h2>
+				</a>
+			</li>
+		</ul>
+    </div>
+</div>
+</body>
+</html>

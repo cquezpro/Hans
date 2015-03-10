@@ -1,0 +1,129 @@
+/* default override of browser margin and padding */
+* {
+  margin: 0;
+  padding: 0;
+  text-shadow: 0 0 0px;
+}
+
+/* Fixes windows phone 8 default width of 320px */
+@-ms-viewport {
+  width: device-width;
+}
+
+/********* General Style Sheet **********/
+.ui-checkbox label.ui-checkbox-off {
+	background: white !important;
+}
+.ui-checkbox label.ui-checkbox-on {
+	background: #00b0eb !important;
+}
+
+.ui-checkbox-off:after {
+	background-color: white !important;
+}
+.ui-checkbox-on:after {
+	background-color: green !important;
+}
+
+.subtext{
+	white-space: pre-line !important;
+}
+
+/**********Input Page **************/
+#input .ui-content .ui-select{
+	margin:0px;
+}
+#input .weight .ui-input-text {
+	float: left;
+	width: 85px;
+	margin-left: 28px;
+}
+#input #meanbtn {
+	margin: 0px;
+	/*border-top-left-radius: 7px;
+	border-bottom-left-radius: 7px;*/
+}
+#input #weight {
+	position: relative;
+	font-size: 15px;
+}
+
+
+/*********Home Page**************/
+
+#home .emergBtn{
+	margin: 5px 0 10px 0;
+	background: rgb(201, 55, 55);
+	color: white;
+	border: solid 1px black;
+}
+#home .ui-content .ui-li-divider{
+	padding: 12px;
+	/*text-align: right;
+	font-style: italic;*/
+	font-size: 18px;
+}
+#home .ui-listview{
+	margin: 0px;
+	border: solid 1px grey;
+}
+
+/*********Options Page**************/
+#options .ui-listview{
+	margin: 0px;
+	border: solid 1px grey;
+}
+#options .ui-content .ui-li-divider{
+	padding: 10px;
+	font-size: 17px;
+}
+#options .ui-flipswitch{
+	float: right;
+	margin: 0px;
+}
+#options .number{
+	float: right;
+	width: 60px;
+}
+#options .title {
+	top: 6px;
+	position: relative;
+}
+#options .title1{
+	margin-left: 50px;
+	margin-top: 8px;
+	float: left;
+}
+#options .lang{
+	margin-left: 50px;
+}
+#options .dateformat, #options .unit{
+	margin-left: 70px;
+}
+
+#options .vLanguage{
+	float: left;
+	width: 40%;
+	margin-top: 20px;
+}
+#options .ui-select{
+	width: 50%;
+	float: right;
+	right: 0px;
+	bottom: 0px
+}
+
+#options .ui-listview li{
+	padding: 7px 10px 7px 10px !important;
+}
+
+#options .ui-listview li .ui-input-text{
+	margin: 0px;
+}
+#options  .changelang{
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+#options .noborder{
+	border: none !important;
+}
