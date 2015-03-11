@@ -19,7 +19,7 @@ function onDeviceReady(){
     }
 
     changeLanguage();
-}
+ }
 
 //Name: Home page show (jquery mobile  function)
 //Comment: 
@@ -83,6 +83,7 @@ function changeLanguage(){
 	$('.vLanguage').html(langLabel[currLang].vLanguage);
 	$('.vWeight').html(langLabel[currLang].vWeight);
 	$('.vNumber').html(langLabel[currLang].vNumber);
+	$('.vAmount').html(langLabel[currLang].vAmount);
 	
 	//input page
 	$('.vTraining').html(langLabel[currLang].vTraining);
@@ -101,5 +102,5 @@ function changeLanguage(){
 	$('.vDailynote').html(langLabel[currLang].vDailynote);
 	$('.vWeight').html(langLabel[currLang].vWeight);
 	$('.vCompleteDay').html(langLabel[currLang].vCompleteDay);	
-	
+
 }

@@ -89,7 +89,7 @@
 			</a>
 		</div>
 		<div class="ui-btn-right" data-role="controlgroup" data-type="horizontal" style="margin:5px 0 10px 0;" >
-		  <a href="#" class="vTraining" data-role="button" data-icon="arrow-l" >Training</a>
+		  <a href="#input" class="vInput" data-role="button" data-icon="arrow-l" >Input</a>
 		  <a href="#" class="vEvaluation" data-role="button" data-icon="arrow-r" data-iconpos="right">Evaluation</a>
 		</div>
     </div>
@@ -102,9 +102,9 @@
 		    	<input class="flip" type="checkbox" data-role="flipswitch"  checked="" data-mini="true">
 		    </li>
 		    <li class="noborder">
-		    	<div class="title1 vNumber">Number</div>
+		    	<div class="title1 vAmount">Number</div>
 		    	<span class="number">
-		    		<input type="number" value="3" />
+		    		<input type="number" value="3" data-mini="true"/>
 		    	</span>
 		    </li>
 		    <li>
@@ -112,9 +112,9 @@
 		    	<input class="flip" type="checkbox" data-role="flipswitch" data-mini="true">
 		    </li>
 		    <li class="noborder">
-		    	<div class="title1 vNumber">Number</div>
+		    	<div class="title1 vAmount">Number</div>
 		    	<span class="number">
-		    		<input type="number" value="3" />
+		    		<input type="number" value="3" data-mini="true"/>
 		    	</span>
 		    </li>
 		    <li>
@@ -122,9 +122,9 @@
 		    	<input class="flip" type="checkbox" data-role="flipswitch" data-mini="true">
 		    </li>
 		    <li class="noborder">
-		    	<div class="title1 vNumber">Number</div>
+		    	<div class="title1 vAmount">Number</div>
 		    	<span class="number">
-		    		<input type="number" value="3" />
+		    		<input type="number" value="3" data-mini="true"/>
 		    	</span>
 		    </li>
 		    <li>
@@ -132,16 +132,16 @@
 		    	<input class="flip" type="checkbox" data-role="flipswitch" data-mini="true">
 		    </li>
 		    <li class="noborder">
-		    	<div class="title1 vNumber">Number</div>
+		    	<div class="title1 vAmount">Number</div>
 		    	<span class="number">
-		    		<input type="number" value="3" />
+		    		<input type="number" value="3" data-mini="true"/>
 		    	</span>
 		    </li>
 		    <li>
 		    	<span class="title vNeverDrinkAlc">I never drink alcohol</span>
 		    	<input class="flip" type="checkbox" data-role="flipswitch"  checked="" data-mini="true">
 		    </li>
-		    <li>
+		    <li class="nopadding">
 		    	<a class="changelang" href="#" data-role="button" data-icon="flag">
 		    		<span class="vLanguage">Language:</span>
 		    		<select id="multilang">
@@ -151,12 +151,12 @@
 		    		<!--<span class="lang">english</span>-->
 		    	</a>
 		    </li>
-		    <li>
+		    <li class="nopadding">
 		    	<a href="#">
 		    		Date format:<span class="dateformat">dd/mm/yy</span>
 		    	</a>
 		    </li>
-		    <li>
+		    <li class="nopadding">
 		    	<a href="#">
 		    		<span class="vWeight">Weight</span>
 		    		 unit:<span class="unit">kg</span>
@@ -185,10 +185,11 @@
 		<ul data-role="listview" data-inset="true" style="padding:0px;margin: 0px;border-radius: 0px;border: none;">
 			<li>
 			  <a href="index.html">
-				<h2 style="text-align:left;font-style:italic">
+				<span class="vInput">Input</span>
+				<span style="text-align:left;font-size:15px;">
 					<span class="title">Mo. </span>
 					<span class="date">15.09.2014</span>
-				</h2>
+				</span>
 				<p>
 					<span class="vLastMeal">Last meal: </span>
 					<span class="vLunch">Lunch</span>
