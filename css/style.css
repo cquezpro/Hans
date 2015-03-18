@@ -142,3 +142,28 @@
 	border-radius: 0px;
 	-webkit-border-radius: 0px;
 }
+/*************Meal Type Page*****************/
+.history a {
+	padding: 0px;  
+	min-height: 50px !important;
+	background:white !important;
+}
+.history h2{
+	position:absolute;
+	left:10px;
+	top:10px;
+}
+.history img {
+	position:absolute;
+	right: 35px;
+	width: 30px;
+	top:10px;
+}
+
+
+/***********Question Page *******************/
+#question .vInput {
+  font-size: 17px;
+  margin-right: 30px;
+  font-style: italic;
+}

@@ -1,5 +1,5 @@
 <!--Copyright by: Matthias Zubke, 75196 Remchingen, Germany
-Version 1.0.0, 2015-03-12
+Version 1.0.1, 2015-03-18
 -->
 <!DOCTYPE html>
 <html>
@@ -202,7 +202,7 @@ Version 1.0.0, 2015-03-12
 				<div data-role="navbar">
 					<ul>
 						<li>	
-							<a id="meanbtn" href="index.html" onclick="alert('coming soon!');">
+							<a id="meanbtn" href="#mealtype1">
 								<span class="vMeal">Meal</span>
 							</a>
 						</li>
@@ -337,6 +337,388 @@ Version 1.0.0, 2015-03-12
 					<h2 style="float:left;margin-top: 15px;" class="vCompleteDay">Complete the day</h2>
 				</a>
 			</li>
+		</ul>
+    </div>
+</div>
+
+<!-- ######################### Meal Type Page ########################### -->
+<div data-role="page" id="mealtype1" data-theme="a">
+    <!-- Header -->
+    <div data-role="header" data-position="fixed" style="height: 50px;">
+        <div class="ui-btn-left">
+			<a class="vBack" style="margin:5px 0 10px 0;" data-role="button"  href="#input" data-icon="arrow-l" data-iconpos="left">
+			Back
+			</a>
+		</div>
+		<div class="ui-btn-right" data-role="controlgroup" data-type="horizontal" style="margin:5px 0 10px 0;" >
+		  <a href="#" class="vTraining" data-role="button" data-icon="arrow-l" >Training</a>
+		  <a href="#" class="vEvaluation" data-role="button" data-icon="arrow-r" data-iconpos="right">Evaluation</a>
+		</div>
+    </div>
+    <!-- main content-->
+    <div role="main" class="ui-content" style="padding:0px;margin: 0px;">
+		<ul data-role="listview" data-inset="true" style="padding:0px;margin: 0px;border-radius: 0px;border: none;">
+			<li>
+				<div style="text-align:center;font-size:15px;">
+					<span class="title">Mo. </span>
+					<span class="date">15.09.2014</span>
+				</div>
+				<p>
+					<span class="vLastMeal">Last meal: </span>
+					<span class="vLunch">Lunch</span>
+				</p>
+			</li>
+			<li style="padding: 20px;">
+				<div class="ui-btn-left">
+					<h2 class="vSelectType">Select type of meal</h2>
+				</div>
+			</li>
+			<li style="padding: 20px;">
+				<div class="ui-btn-left">
+					<h2 class="vFastlane">Fastlane</h2>
+				</div>
+				<div class="ui-btn-right" style="right: 105px;top:10px">
+					<div data-role="controlgroup" data-type="horizontal">
+						<input name="meal" type="radio" style="margin-left:70px;"/>
+					</div>
+				</div>
+			</li>
+			<li style="padding: 20px;">
+				<div class="ui-btn-left">
+					<h2 class="VBBreakfast">Before breakfast</h2>
+				</div>
+				<div class="ui-btn-right" style="right: 105px;top:10px">
+					<div data-role="controlgroup" data-type="horizontal">
+						<input name="meal" type="radio" style="margin-left:70px;"/>
+					</div>
+				</div>
+			</li>
+			<li style="padding: 20px;">
+				<div class="ui-btn-left">
+					<h2 class="vBreakfast">Breakfast</h2>
+				</div>
+				<div class="ui-btn-right" style="right: 105px;top:10px">
+					<div data-role="controlgroup" data-type="horizontal">
+						<input name="meal" type="radio" style="margin-left:70px;"/>
+					</div>
+				</div>
+			</li>
+			<li style="padding: 20px;">
+				<div class="ui-btn-left">
+					<h2 class="vABreakfast">After breakfast</h2>
+				</div>
+				<div class="ui-btn-right" style="right: 105px;top:10px">
+					<div data-role="controlgroup" data-type="horizontal">
+						<input name="meal" type="radio" style="margin-left:70px;"/>
+					</div>
+				</div>
+			</li>
+			<li style="padding: 20px;">
+				<div class="ui-btn-left">
+					<h2 class="vLunch">Lunch</h2>
+				</div>
+				<div class="ui-btn-right" style="right: 105px;top:10px">
+					<div data-role="controlgroup" data-type="horizontal">
+						<input name="meal" type="radio" style="margin-left:70px;"/>
+					</div>
+				</div>
+			</li>
+			<li style="padding: 20px;">
+				<div class="ui-btn-left">
+					<h2 class="vALunch">After lunch</h2>
+				</div>
+				<div class="ui-btn-right" style="right: 105px;top:10px">
+					<div data-role="controlgroup" data-type="horizontal">
+						<input name="meal" type="radio" style="margin-left:70px;"/>
+					</div>
+				</div>
+			</li>
+			<li style="padding: 20px;">
+				<div class="ui-btn-left">
+					<h2 class="vDinner">Dinner</h2>
+				</div>
+				<div class="ui-btn-right" style="right: 105px;top:10px">
+					<div data-role="controlgroup" data-type="horizontal">
+						<input name="meal" type="radio" style="margin-left:70px;"/>
+					</div>
+				</div>
+			</li>
+			<li style="padding: 20px;">
+				<div class="ui-btn-left">
+					<h2 class="vADinner">After dinner</h2>
+				</div>
+				<div class="ui-btn-right" style="right: 105px;top:10px">
+					<div data-role="controlgroup" data-type="horizontal">
+						<input name="meal" type="radio" style="margin-left:70px;"/>
+					</div>
+				</div>
+			</li>
+		</ul>
+    </div>
+</div>
+
+<!-- ######################### Meal Type Page 2########################### -->
+<div data-role="page" id="mealtype2" data-theme="a">
+    <!-- Header -->
+    <div data-role="header" data-position="fixed" style="height: 50px;">
+        <div class="ui-btn-left">
+			<a class="vBack" style="margin:5px 0 10px 0;" data-role="button"  href="#input" data-icon="arrow-l" data-iconpos="left">
+			Back
+			</a>
+		</div>
+		<div class="ui-btn-right" data-role="controlgroup" data-type="horizontal" style="margin:5px 0 10px 0;" >
+		  <a href="#" class="vTraining" data-role="button" data-icon="arrow-l" >Training</a>
+		  <a href="#" class="vEvaluation" data-role="button" data-icon="arrow-r" data-iconpos="right">Evaluation</a>
+		</div>
+    </div>
+    <!-- main content-->
+    <div role="main" class="ui-content" style="padding:0px;margin: 0px;">
+		<ul data-role="listview" data-inset="true" style="padding:0px;margin: 0px;border-radius: 0px;border: none;">
+			<li>
+				<div style="text-align:center;font-size:15px;">
+					<span class="title">Mo. </span>
+					<span class="date">15.09.2014</span>
+				</div>
+				<p>
+					<span class="vLastMeal">Last meal: </span>
+					<span class="vLunch">After Lunch</span>
+				</p>
+			</li>
+			<li style="padding: 20px;">
+				<div class="ui-btn-left">
+					<h2 class="vSelectType">Select type of meal</h2>
+				</div>
+			</li>
+			<li style="padding: 20px;">
+				<div class="ui-btn-left">
+					<h2 class="vALunch">After lunch</h2>
+				</div>
+				<div class="ui-btn-right" style="right: 105px;top:10px">
+					<div data-role="controlgroup" data-type="horizontal">
+						<input name="meal" type="radio" style="margin-left:70px;"/>
+					</div>
+				</div>
+			</li>
+			<li style="padding: 20px;">
+				<div class="ui-btn-left">
+					<h2 class="vDinner">Dinner</h2>
+				</div>
+				<div class="ui-btn-right" style="right: 105px;top:10px">
+					<div data-role="controlgroup" data-type="horizontal">
+						<input name="meal" type="radio" style="margin-left:70px;"/>
+					</div>
+				</div>
+			</li>
+			<!--<li style="padding: 20px;">
+				<div class="ui-btn-left">
+					<h2 class="vSelectType">Meal history</h2>
+				</div>
+			</li>-->
+		    <li class="vMealHistory" data-role="list-divider">Meal history</li>
+			<li class="history">
+				<a href="#" style="">
+					<h2  class="vBreakfast">Breakfast</h2>
+					<img src="res/good.png" alt="good" />
+				</a>
+			</li>
+			<li class="history">
+				<a href="#" style="">
+					<h2  class="vLunch">Lunch</h2>
+					<img src="res/better.png" alt="good" />
+				</a>
+			</li>
+			<li class="history">
+				<a href="#" style="">
+					<h2  class="vALunch">After Lunch</h2>
+					<img src="res/good.png" alt="good" />
+				</a>
+			</li>
+			<li class="history">
+				<a href="#" style="">
+					<h2  class="vALunch">After Lunch</h2>
+					<img src="res/bad.png" alt="bad" />
+				</a>
+			</li>
+		</ul>
+    </div>
+</div>
+
+<!-- ######################### Meal Type Page 3########################### -->
+<div data-role="page" id="mealtype3" data-theme="a">
+    <!-- Header -->
+    <div data-role="header" data-position="fixed" style="height: 50px;">
+        <div class="ui-btn-left">
+			<a class="vBack" style="margin:5px 0 10px 0;" data-role="button"  href="#input" data-icon="arrow-l" data-iconpos="left">
+			Back
+			</a>
+		</div>
+		<div class="ui-btn-right" data-role="controlgroup" data-type="horizontal" style="margin:5px 0 10px 0;" >
+		  <a href="#" class="vTraining" data-role="button" data-icon="arrow-l" >Training</a>
+		  <a href="#" class="vEvaluation" data-role="button" data-icon="arrow-r" data-iconpos="right">Evaluation</a>
+		</div>
+    </div>
+    <!-- main content-->
+    <div role="main" class="ui-content" style="padding:0px;margin: 0px;">
+		<ul data-role="listview" data-inset="true" style="padding:0px;margin: 0px;border-radius: 0px;border: none;">
+			<li>
+				<div style="text-align:center;font-size:15px;">
+					<span class="title">Mo. </span>
+					<span class="date">15.09.2014</span>
+				</div>
+				<p>
+					<span class="vLastMeal">Last meal: </span>
+					<span class="vLunch">Fast lane</span>
+				</p>
+			</li>
+			<li class="vMealHistory" data-role="list-divider">Meal history</li>
+			<li class="history">
+				<a href="#" style="">
+					<h2  class="vFastlane">Fastlane</h2>
+					<img src="res/good.png" alt="good" />
+				</a>
+			</li>
+		</ul>
+    </div>
+</div>
+
+
+<!-- ######################### Question Page ########################### -->
+<div data-role="page" id="question" data-theme="a">
+    <!-- Header -->
+    <div data-role="header" data-position="fixed" style="height: 50px;">
+        <div class="ui-btn-left">
+			<a class="vBack" style="margin:5px 0 10px 0;" data-role="button"  href="#input" data-icon="arrow-l" data-iconpos="left">
+			Back
+			</a>
+		</div>
+		<div class="ui-btn-right" data-role="controlgroup" data-type="horizontal" style="margin:5px 0 10px 0;" >
+		  <a href="#" class="vTraining" data-role="button" data-icon="arrow-l" >Training</a>
+		  <a href="#" class="vEvaluation" data-role="button" data-icon="arrow-r" data-iconpos="right">Evaluation</a>
+		</div>
+    </div>
+    <!-- main content-->
+    <div role="main" class="ui-content" style="padding:0px;margin: 0px;">
+		<ul data-role="listview" data-inset="true" style="padding:0px;margin: 0px;border-radius: 0px;border: none;">
+			<li style="font-weight: bold;padding-bottom: 0px;">
+				<span class="vInput">Input</span>
+				<span style="text-align: center; font-size:15px;">
+					<span class="title">Mo. </span>
+					<span class="date">15.09.2014</span>
+				</span>
+				<p>
+					<span class="vDinner">Dinner</span>
+				</p>
+			</li>
+			<li style="font-weight: bold;padding:10px; min-height:40px;">
+				<a href="#" class="ui-btn-left ui-shadow ui-corner-all ui-icon-question ui-btn-icon-notext">info</a>
+				<div id="title" style="text-align:right;  margin-left: 100px;">
+					This is a question, Can you provide the correct questions here?
+				</div>
+			</li>
+
+<!----------- Question List Start ---------------------->			
+				<li class="A1" style="padding: 20px;">
+					<div class="ui-btn-left">
+						<h2></h2>
+					</div>
+					<div class="ui-btn-right" style="right: 105px;top:10px">
+						<div data-role="controlgroup" data-type="horizontal">
+							<input name="meal" type="radio" style="margin-left:70px;"/>
+						</div>
+					</div>
+				</li>
+				<li class="A2" style="padding: 20px;">
+					<div class="ui-btn-left">
+						<h2></h2>
+					</div>
+					<div class="ui-btn-right" style="right: 105px;top:10px">
+						<div data-role="controlgroup" data-type="horizontal">
+							<input name="meal" type="radio" style="margin-left:70px;"/>
+						</div>
+					</div>
+				</li>
+				<li class="A3" style="padding: 20px;">
+					<div class="ui-btn-left">
+						<h2></h2>
+					</div>
+					<div class="ui-btn-right" style="right: 105px;top:10px">
+						<div data-role="controlgroup" data-type="horizontal">
+							<input name="meal" type="radio" style="margin-left:70px;"/>
+						</div>
+					</div>
+				</li>
+				<li class="A4" style="padding: 20px;">
+					<div class="ui-btn-left">
+						<h2></h2>
+					</div>
+					<div class="ui-btn-right" style="right: 105px;top:10px">
+						<div data-role="controlgroup" data-type="horizontal">
+							<input name="meal" type="radio" style="margin-left:70px;"/>
+						</div>
+					</div>
+				</li>
+				<li class="A5" style="padding: 20px;">
+					<div class="ui-btn-left">
+						<h2></h2>
+					</div>
+					<div class="ui-btn-right" style="right: 105px;top:10px">
+						<div data-role="controlgroup" data-type="horizontal">
+							<input name="meal" type="radio" style="margin-left:70px;"/>
+						</div>
+					</div>
+				</li>
+				<li class="A6" style="padding: 20px;">
+					<div class="ui-btn-left">
+						<h2></h2>
+					</div>
+					<div class="ui-btn-right" style="right: 105px;top:10px">
+						<div data-role="controlgroup" data-type="horizontal">
+							<input name="meal" type="radio" style="margin-left:70px;"/>
+						</div>
+					</div>
+				</li>
+				<li class="A7" style="padding: 20px;">
+					<div class="ui-btn-left">
+						<h2></h2>
+					</div>
+					<div class="ui-btn-right" style="right: 105px;top:10px">
+						<div data-role="controlgroup" data-type="horizontal">
+							<input name="meal" type="radio" style="margin-left:70px;"/>
+						</div>
+					</div>
+				</li>
+				<li class="A8" style="padding: 20px;">
+					<div class="ui-btn-left">
+						<h2></h2>
+					</div>
+					<div class="ui-btn-right" style="right: 105px;top:10px">
+						<div data-role="controlgroup" data-type="horizontal">
+							<input name="meal" type="radio" style="margin-left:70px;"/>
+						</div>
+					</div>
+				</li>
+				<li class="A9" style="padding: 20px;">
+					<div class="ui-btn-left">
+						<h2></h2>
+					</div>
+					<div class="ui-btn-right" style="right: 105px;top:10px">
+						<div data-role="controlgroup" data-type="horizontal">
+							<input name="meal" type="radio" style="margin-left:70px;"/>
+						</div>
+					</div>
+				</li>
+				<li class="A10" style="padding: 20px;">
+					<div class="ui-btn-left">
+						<h2></h2>
+					</div>
+					<div class="ui-btn-right" style="right: 105px;top:10px">
+						<div data-role="controlgroup" data-type="horizontal">
+							<input name="meal" type="radio" style="margin-left:70px;"/>
+						</div>
+					</div>
+				</li>
+<!----------- Question List End ---------------------->				
+			</ul>
 		</ul>
     </div>
 </div>

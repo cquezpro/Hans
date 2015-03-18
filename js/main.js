@@ -1,10 +1,14 @@
 /*---Copyright by: Matthias Zubke, 75196 Remchingen, Germany--*/
+
 var currLang = 0;
+var questionList = [];
 
 //Cordova library ready function
 document.addEventListener("deviceready", onDeviceReady, false);
 
 onDeviceReady();//We need to call this function directly for web version.
+
+loadQuestionJSONFile();//Load de_Questions_AB2.json file
 
 //Name: onDeviceReady
 //Comment: 
@@ -55,6 +59,76 @@ $(document).on("pageshow", "#options", function(event) {
 });
 
 
+$(document).on("pageshow", "#mealtype1", function(event) {
+	changeLanguage();
+});
+
+$(document).on("pageshow", "#mealtype2", function(event) {
+	changeLanguage();
+});
+
+$(document).on("pageshow", "#mealtype3", function(event) {
+	changeLanguage();
+});
+
+
+/***********
+	Load Question Page
+	Test Phase: Show Questions about Hunger
+************/
+$(document).on("pageshow", "#question", function(event) {
+	changeLanguage();
+	$("input[type='radio']").checkboxradio();
+	$("input[type='radio']").checkboxradio("refresh");
+	for(var i=0;i<questionList.length;i++) {
+		var question = questionList[i]; 
+		if(question._id == "KHunger") {
+			$("#question #title").html(question.Titel);
+			$("#question .A1 h2").html(question.A1);
+			$("#question .A2 h2").html(question.A2);
+			$("#question .A3 h2").html(question.A3);
+			$("#question .A4 h2").html(question.A4);
+			$("#question .A5 h2").html(question.A5);
+			$("#question .A6 h2").html(question.A6);
+			$("#question .A7 h2").html(question.A7);
+			$("#question .A8 h2").html(question.A8);
+			$("#question .A9 h2").html(question.A9);
+			$("#question .A10 h2").html(question.A10);
+			
+			if(question.A1.length < 1){
+				$("#question .A1").hide();
+			}
+			if(question.A2.length < 1){
+				$("#question .A2").hide();
+			}
+			if(question.A3.length < 1){
+				$("#question .A3").hide();
+			}
+			if(question.A4.length < 1){
+				$("#question .A4").hide();
+			}
+			if(question.A5.length < 1){
+				$("#question .A5").hide();
+			}
+			if(question.A6.length < 1){
+				$("#question .A6").hide();
+			}
+			if(question.A7.length < 1){
+				$("#question .A7").hide();
+			}
+			if(question.A8.length < 1){
+				$("#question .A8").hide();
+			}
+			if(question.A9.length < 1){
+				$("#question .A9").hide();
+			}
+			if(question.A10.length < 1){
+				$("#question .A10").hide();
+			}
+		}
+	}	
+});
+
 //Name: changeLanguage
 //Comment: 
 //1. Localization with current language
@@ -103,4 +177,28 @@ function changeLanguage(){
 	$('.vWeight').html(langLabel[currLang].vWeight);
 	$('.vCompleteDay').html(langLabel[currLang].vCompleteDay);	
 
+	//Mean type page
+	$('.vLastMeal').html(langLabel[currLang].vLastMeal);
+	$('.vLunch').html(langLabel[currLang].vLunch);
+	$('.vSelectType').html(langLabel[currLang].vSelectType);
+	$('.vBBreakfast').html(langLabel[currLang].vBBreakfast);
+	$('.vBreakfast').html(langLabel[currLang].vBreakfast);
+	$('.vABreakfast').html(langLabel[currLang].vABreakfast);
+	$('.vLunch').html(langLabel[currLang].vLunch);
+	$('.vALunch').html(langLabel[currLang].vALunch);
+	$('.vDinner').html(langLabel[currLang].vDinner);
+	$('.vADinner').html(langLabel[currLang].vADinner);
+	$('.vMealHistory').html(langLabel[currLang].vMealHistory);
+}
+
+
+/*****************
+Load JSON File
+json file path: data/de_Questions_AB2.json
+******************/
+function loadQuestionJSONFile() {
+	$.getJSON("data/de_Questions_AB2.json", function( data ) {
+		questionList = data.Standardfragen_de.Frage;
+		//alert(questionList.length);
+	});
 }
