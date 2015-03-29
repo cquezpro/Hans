@@ -2,6 +2,7 @@
 
 var currLang = 0;
 var questionList = [];
+var mealHistoryList = [];
 
 //Cordova library ready function
 document.addEventListener("deviceready", onDeviceReady, false);
@@ -9,6 +10,35 @@ document.addEventListener("deviceready", onDeviceReady, false);
 onDeviceReady();//We need to call this function directly for web version.
 
 loadQuestionJSONFile();//Load de_Questions_AB2.json file
+
+//Define Meal Type
+var MEAL_TYPE = {
+	None: 0,
+	Fastlane : 1,
+	BBreakfast : 2,
+	Breakfast : 3,
+	ABreakfast : 4,
+	Lunch : 5,
+	ALunch : 6,
+	Dinner : 7,
+	ADinner : 8
+};
+
+var MealTypes = ["None","Fastlane","BBreakfast","Breakfast","ABreakfast","Lunch","ALunch","Dinner","ADinner"];
+
+var MealTypeClass = ["None","vFastlane","vBBreakfast","vBreakfast","vABreakfast","vLunch","vALunch","vDinner","vADinner"];
+
+//Define Mood status
+var MOOD = {
+	Bad : 0,
+	Normal : 1,
+	Good : 2
+}
+
+//Save latest Meal type on the local storage
+
+
+
 
 //Name: onDeviceReady
 //Comment: 
@@ -23,7 +53,7 @@ function onDeviceReady(){
     }
 
     changeLanguage();
- }
+}
 
 //Name: Home page show (jquery mobile  function)
 //Comment: 
@@ -59,17 +89,193 @@ $(document).on("pageshow", "#options", function(event) {
 });
 
 
-$(document).on("pageshow", "#mealtype1", function(event) {
+//MealType Page Show Events
+$(document).on("pageshow", "#mealtype", function(event) {
+	
+	//alert(MEAL_TYPE.ADinner);
+	
+	//Decide the available meal type
+	var lastMealType = window.localStorage.getItem("lastmeal");
+	var mealString = "";
+	
+	if(lastMealType == undefined || lastMealType == null) {
+		lastMealType = MEAL_TYPE.None;
+	}
+	
+	if(lastMealType == MEAL_TYPE.None && lastMealType != MEAL_TYPE.Fastlane) {
+		mealString += '<li class="fastlane" style="padding: 20px;">';
+		mealString += '	<div class="ui-btn-left">';
+		mealString += '		<h2 class="vFastlane">Fastlane</h2>';
+		mealString += '	</div>';
+		mealString += '	<div class="ui-btn-right" style="right: 105px;top:10px">';
+		mealString += '		<div data-role="controlgroup" data-type="horizontal">';
+		mealString += '			<input name="meal" type="radio" style="margin-left:70px;"/>';
+		mealString += '		</div>';
+		mealString += '	</div>';
+		mealString += '</li>';
+	}
+	
+	if(lastMealType == MEAL_TYPE.None && lastMealType != MEAL_TYPE.Fastlane) {
+		mealString += '<li class="bbreakfast" style="padding: 20px;">';
+		mealString += '	<div class="ui-btn-left">';
+		mealString += '		<h2 class="VBBreakfast">Before breakfast</h2>';
+		mealString += '	</div>';
+		mealString += '	<div class="ui-btn-right" style="right: 105px;top:10px">';
+		mealString += '		<div data-role="controlgroup" data-type="horizontal">';
+		mealString += '			<input name="meal" type="radio" style="margin-left:70px;"/>';
+		mealString += '		</div>';
+		mealString += '	</div>';
+		mealString += '</li>';
+	}
+	
+	if(lastMealType < MEAL_TYPE.Breakfast && lastMealType != MEAL_TYPE.Fastlane) {
+		mealString += '<li class="breakfast" style="padding: 20px;">';
+		mealString += '	<div class="ui-btn-left">';
+		mealString += '		<h2 class="vBreakfast">Breakfast</h2>';
+		mealString += '	</div>';
+		mealString += '	<div class="ui-btn-right" style="right: 105px;top:10px">';
+		mealString += '		<div data-role="controlgroup" data-type="horizontal">';
+		mealString += '			<input name="meal" type="radio" style="margin-left:70px;"/>';
+		mealString += '		</div>';
+		mealString += '	</div>';
+		mealString += '</li>';
+	}
+	
+	if(lastMealType <= MEAL_TYPE.ABreakfast && lastMealType != MEAL_TYPE.Fastlane) {
+		mealString += '<li class="abreakfast" style="padding: 20px;">';
+		mealString += '	<div class="ui-btn-left">';
+		mealString += '		<h2 class="vABreakfast">After breakfast</h2>';
+		mealString += '	</div>';
+		mealString += '	<div class="ui-btn-right" style="right: 105px;top:10px">';
+		mealString += '		<div data-role="controlgroup" data-type="horizontal">';
+		mealString += '			<input name="meal" type="radio" style="margin-left:70px;"/>';
+		mealString += '		</div>';
+		mealString += '	</div>';
+		mealString += '</li>';
+	}
+	
+	if(lastMealType < MEAL_TYPE.Lunch && lastMealType != MEAL_TYPE.Fastlane) {
+		mealString += '<li class="lunch" style="padding: 20px;">';
+		mealString += '	<div class="ui-btn-left">';
+		mealString += '		<h2 class="vLunch">Lunch</h2>';
+		mealString += '	</div>';
+		mealString += '	<div class="ui-btn-right" style="right: 105px;top:10px">';
+		mealString += '		<div data-role="controlgroup" data-type="horizontal">';
+		mealString += '			<input name="meal" type="radio" style="margin-left:70px;"/>';
+		mealString += '		</div>';
+		mealString += '	</div>';
+		mealString += '</li>';
+	}
+	
+	if(lastMealType <= MEAL_TYPE.ALunch && lastMealType != MEAL_TYPE.Fastlane) {
+		mealString += '<li class="alunch" style="padding: 20px;">';
+		mealString += '	<div class="ui-btn-left">';
+		mealString += '		<h2 class="vALunch">After lunch</h2>';
+		mealString += '	</div>';
+		mealString += '	<div class="ui-btn-right" style="right: 105px;top:10px">';
+		mealString += '		<div data-role="controlgroup" data-type="horizontal">';
+		mealString += '			<input name="meal" type="radio" style="margin-left:70px;"/>';
+		mealString += '		</div>';
+		mealString += '	</div>';
+		mealString += '</li>';
+	}
+	
+	if(lastMealType < MEAL_TYPE.Dinner && lastMealType != MEAL_TYPE.Fastlane) {
+		mealString += '<li class="dinner" style="padding: 20px;">';
+		mealString += '	<div class="ui-btn-left">';
+		mealString += '		<h2 class="vDinner">Dinner</h2>';
+		mealString += '	</div>';
+		mealString += '	<div class="ui-btn-right" style="right: 105px;top:10px">';
+		mealString += '		<div data-role="controlgroup" data-type="horizontal">';
+		mealString += '			<input name="meal" type="radio" style="margin-left:70px;"/>';
+		mealString += '		</div>';
+		mealString += '	</div>';
+		mealString += '</li>';
+	}	
+	
+	if(lastMealType <= MEAL_TYPE.ADinner && lastMealType != MEAL_TYPE.Fastlane) {
+		mealString += '<li class="adinner" style="padding: 20px;">';
+		mealString += '	<div class="ui-btn-left">';
+		mealString += '		<h2 class="vADinner">After dinner</h2>';
+		mealString += '	</div>';
+		mealString += '	<div class="ui-btn-right" style="right: 105px;top:10px">';
+		mealString += '		<div data-role="controlgroup" data-type="horizontal">';
+		mealString += '			<input name="meal" type="radio" style="margin-left:70px;"/>';
+		mealString += '		</div>';
+		mealString += '	</div>';
+		mealString += '</li>';
+	}
+	
+	$("#mealtypeList").html(mealString);
+	
+	$("#mealtypeList input[type='radio']").checkboxradio();
+	$("#mealtypeList input[type='radio']").checkboxradio("refresh");
+	//$( "#mealtypeList #fastlaneRdo" ).prop( "checked", true ).checkboxradio( "refresh" );
+	$( "#mealtypeList" ).listview( "refresh" );
+	
+	
+	var historyString = "";
+	//Load meal history
+	for(var i = 0; i < mealHistoryList.length; i++){
+		var mealHistory = mealHistoryList[i];
+		
+		className = MealTypeClass[mealHistory.mealtype];
+		mealtype = MealTypes[mealHistory.mealtype];
+		
+		var imgSrc = "better.png";
+		if(mealHistory.status <= 2.9){
+			imgSrc = "bad.png"
+		}else if (mealHistory.status <= 3.9){
+			imgSrc = "good.png"
+		}else{
+			imgSrc = "better.png"
+		}
+		
+		historyString += '<li class="history">';
+		historyString += '	<a href="#" style="">';
+		historyString += '		<h2  class="' + className  + '">' + mealtype + '</h2>';
+		historyString += '		<img src="res/' + imgSrc + '" alt="good" />';
+		historyString += '	</a>';
+		historyString += '</li>';
+	}
+	
+	$("#mealhistoryList").html(historyString);
+	$("#mealhistoryList" ).listview( "refresh" );
+	
 	changeLanguage();
 });
 
-$(document).on("pageshow", "#mealtype2", function(event) {
-	changeLanguage();
+$(document).on("click", "#mealtype #mealtypeList li", function(event) {
+	var className = $(this).attr("class");
+	console.log(className);	
+	if($(this).hasClass("fastlane")) {
+		window.localStorage.setItem("currentMeal", MEAL_TYPE.Fastlane);
+	}
+	if($(this).hasClass("bbreakfast")) {
+		window.localStorage.setItem("currentMeal", MEAL_TYPE.BBreakfast);
+	}
+	if($(this).hasClass("breakfast")) {
+		window.localStorage.setItem("currentMeal", MEAL_TYPE.Breakfast);
+	}
+	if($(this).hasClass("abreakfast")) {
+		window.localStorage.setItem("currentMeal", MEAL_TYPE.ABreakfast);
+	}
+	if($(this).hasClass("lunch")) {
+		window.localStorage.setItem("currentMeal", MEAL_TYPE.Lunch);
+	}
+	if($(this).hasClass("alunch")) {
+		window.localStorage.setItem("currentMeal", MEAL_TYPE.ALunch);
+	}
+	if($(this).hasClass("dinner")) {
+		window.localStorage.setItem("currentMeal", MEAL_TYPE.Dinner);
+	}
+	if($(this).hasClass("adinner")) {
+		window.localStorage.setItem("currentMeal", MEAL_TYPE.ADinner);
+	}
+	
+	$.mobile.changePage("#question");
 });
 
-$(document).on("pageshow", "#mealtype3", function(event) {
-	changeLanguage();
-});
 
 
 /***********
@@ -77,6 +283,12 @@ $(document).on("pageshow", "#mealtype3", function(event) {
 	Test Phase: Show Questions about Hunger
 ************/
 $(document).on("pageshow", "#question", function(event) {
+	
+	currentMeal = window.localStorage.getItem("currentMeal");
+	
+	$("#question .currentmeal").removeClass().addClass("currentmeal");
+	$("#question .currentmeal").addClass(MealTypeClass[currentMeal]);
+
 	changeLanguage();
 	$("input[type='radio']").checkboxradio();
 	$("input[type='radio']").checkboxradio("refresh");
@@ -127,7 +339,28 @@ $(document).on("pageshow", "#question", function(event) {
 			}
 		}
 	}	
+	
+	$("#mealtypeList input[type='radio']").checkboxradio();
+	$("#mealtypeList input[type='radio']").checkboxradio("refresh");	
 });
+
+//Question Page Click Event
+//We will get the number of question.
+$(document).on("click", "#question #questionList li", function(event) {
+	console.log($(this).index());
+	var statusNum = $(this).index() - 1;
+	currentMeal = window.localStorage.getItem("currentMeal");
+	
+	window.localStorage.setItem("lastmeal", currentMeal);
+	
+	mealHistoryList.push({
+		mealtype : currentMeal,
+		status : statusNum		
+	});
+	
+	$.mobile.changePage("#input");
+});
+
 
 //Name: changeLanguage
 //Comment: 
@@ -178,6 +411,8 @@ function changeLanguage(){
 	$('.vCompleteDay').html(langLabel[currLang].vCompleteDay);	
 
 	//Mean type page
+	
+	$('.vFastlane').html(langLabel[currLang].vFastlane);
 	$('.vLastMeal').html(langLabel[currLang].vLastMeal);
 	$('.vLunch').html(langLabel[currLang].vLunch);
 	$('.vSelectType').html(langLabel[currLang].vSelectType);
@@ -189,6 +424,8 @@ function changeLanguage(){
 	$('.vDinner').html(langLabel[currLang].vDinner);
 	$('.vADinner').html(langLabel[currLang].vADinner);
 	$('.vMealHistory').html(langLabel[currLang].vMealHistory);
+	
+	//Question Page
 }
 
 
@@ -202,3 +439,4 @@ function loadQuestionJSONFile() {
 		//alert(questionList.length);
 	});
 }
+
