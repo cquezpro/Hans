@@ -168,9 +168,6 @@
 	border: none;
 }
 
-#mealtype .lastmeal {
-	font-weight: bold;
-}
 /***********Question Page *******************/
 #question .vInput {
   font-size: 17px;
@@ -182,3 +179,7 @@
 }
 
 
+
+.ui-datepicker{
+  background: rgb(255, 255, 255);
+ }

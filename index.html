@@ -18,9 +18,14 @@
 	
 	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
 	<link rel="stylesheet" href="css/jqm-icon-pack-fa.css">	
+	<link rel="stylesheet" href="css/jquery.mobile.datepicker.css">	
 	<link rel="stylesheet" href="css/style.css">
-	<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
-	<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+	
+	<script src="lib/jquery-1.11.2.min.js"></script>
+	<script src="lib/jquery.mobile-1.4.5.min.js"></script>
+	<script src="lib/datepicker.js"></script>
+	<script src="lib/jquery.mobile.datepicker.js"></script>
+	
 	<script src="js/lang.js"></script>
 	<script src="js/main.js"></script>
 </head>
@@ -184,15 +189,16 @@
     <div role="main" class="ui-content" style="padding:0px;margin: 0px;">
 		<ul data-role="listview" data-inset="true" style="padding:0px;margin: 0px;border-radius: 0px;border: none;">
 			<li>
-			  <a href="index.html">
+			  <input type="hidden" data-role="date" id="datePicker" />
+			  <a href="#" onclick="showDatePicker();">
 				<span class="vInput">Input</span>
 				<span style="text-align:left;font-size:15px;">
 					<span class="title">Mo. </span>
-					<span class="date">15.09.2014</span>
+					<span id="date">15/09/2014</span>
 				</span>
 				<p>
 					<span class="vLastMeal">Last meal: </span>
-					<span class="vLunch">Lunch</span>
+					<span class="lastMeal"></span>
 				</p>
 			  </a>
 			</li>
@@ -363,7 +369,7 @@
 				</div>
 				<p>
 					<span class="vLastMeal">Last meal: </span>
-					<span class="lastmeal vLunch">Lunch</span>
+					<span class="lastMeal vLunch">Lunch</span>
 				</p>
 			</li>
 		</ul>

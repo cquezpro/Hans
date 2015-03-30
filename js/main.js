@@ -69,8 +69,39 @@ $(document).on("pageshow", "#home", function(event) {
 //1. This function will call when show input page. 
 //2. Localization with current language
 $(document).on("pageshow", "#input", function(event) {
+
+	$("#input .lastMeal").removeClass().addClass("lastMeal");
+	var lastMealType = window.localStorage.getItem("lastmeal");
+	
+	var mealString = "";
+	
+	if(lastMealType == undefined || lastMealType == null) {
+		
+	}else{
+		$("#input .lastMeal").addClass(MealTypeClass[lastMealType]);
+	}
+	
 	changeLanguage();
 });
+
+//Show date picker control to change date.
+function showDatePicker() {
+	$("#datePicker").datepicker("show");
+}
+
+$(document).on("change", "#input #datePicker", function(event) {
+	//alert($(this).val());
+	var currentDate = window.localStorage.getItem("date");
+	
+	window.localStorage.setItem("date", $(this).val());
+	$("#input #date").html($(this).val());
+	
+	//Reset data
+	mealHistoryList = [];
+	window.localStorage.setItem("currentMeal", "");
+	window.localStorage.setItem("lastmeal", "");
+});
+
 
 //Name: Options page show (jquery mobile  function)
 //Comment: 
@@ -98,8 +129,12 @@ $(document).on("pageshow", "#mealtype", function(event) {
 	var lastMealType = window.localStorage.getItem("lastmeal");
 	var mealString = "";
 	
-	if(lastMealType == undefined || lastMealType == null) {
+	$("#mealtype .lastMeal").removeClass().addClass("lastMeal");		
+	
+	if(lastMealType == undefined || lastMealType == null || lastMealType == "") {
 		lastMealType = MEAL_TYPE.None;
+	}else{
+		$("#mealtype .lastMeal").addClass(MealTypeClass[lastMealType]);
 	}
 	
 	if(lastMealType == MEAL_TYPE.None && lastMealType != MEAL_TYPE.Fastlane) {
