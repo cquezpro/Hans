@@ -68,7 +68,7 @@ $(document).on("pageshow", "#home", function(event) {
 //Comment: 
 //1. This function will call when show input page. 
 //2. Localization with current language
-$(document).on("pageshow", "#input", function(event) {
+$(document).on("pagebeforeshow", "#input", function(event) {
 
 	$("#input .lastMeal").removeClass().addClass("lastMeal");
 	var lastMealType = window.localStorage.getItem("lastmeal");
@@ -79,6 +79,12 @@ $(document).on("pageshow", "#input", function(event) {
 		
 	}else{
 		$("#input .lastMeal").addClass(MealTypeClass[lastMealType]);
+	}
+	
+	date = window.localStorage.getItem("date");
+	
+	if((date != null) && (date != undefined) && (date != 'null')) {
+		$("#input .date").html(date);
 	}
 	
 	changeLanguage();
@@ -93,13 +99,26 @@ $(document).on("change", "#input #datePicker", function(event) {
 	//alert($(this).val());
 	var currentDate = window.localStorage.getItem("date");
 	
-	window.localStorage.setItem("date", $(this).val());
-	$("#input #date").html($(this).val());
+	date = $(this).val();
+	dd = date.substr(3, 2);
+	mm = date.substr(0, 2);
+	yy = date.substr(6, 4);
+	date = dd + "." + mm + "." + yy;
 	
-	//Reset data
-	mealHistoryList = [];
-	window.localStorage.setItem("currentMeal", "");
-	window.localStorage.setItem("lastmeal", "");
+	
+			
+	//console.log($(this).val());
+	window.localStorage.setItem("date", date);
+	$("#input .date").html(date);
+	
+	
+	if(currentDate != date) {
+		//Clear all UI data
+		$("#input input[type='checkbox']").prop( "checked", false ).checkboxradio( "refresh" );
+		window.localStorage.setItem("currentMeal", "");
+		window.localStorage.setItem("lastmeal", "");
+		mealHistoryList = [];
+	}
 });
 
 
@@ -121,9 +140,11 @@ $(document).on("pageshow", "#options", function(event) {
 
 
 //MealType Page Show Events
-$(document).on("pageshow", "#mealtype", function(event) {
+$(document).on("pagebeforeshow", "#mealtype", function(event) {
 	
-	//alert(MEAL_TYPE.ADinner);
+	//show seleted date
+	date = window.localStorage.getItem("date");
+	$("#mealtype .date").html(date);
 	
 	//Decide the available meal type
 	var lastMealType = window.localStorage.getItem("lastmeal");
@@ -150,10 +171,10 @@ $(document).on("pageshow", "#mealtype", function(event) {
 		mealString += '</li>';
 	}
 	
-	if(lastMealType == MEAL_TYPE.None && lastMealType != MEAL_TYPE.Fastlane) {
+	if((lastMealType == MEAL_TYPE.None && lastMealType != MEAL_TYPE.Fastlane) || lastMealType == MEAL_TYPE.BBreakfast) {
 		mealString += '<li class="bbreakfast" style="padding: 20px;">';
 		mealString += '	<div class="ui-btn-left">';
-		mealString += '		<h2 class="VBBreakfast">Before breakfast</h2>';
+		mealString += '		<h2 class="vBBreakfast">Before breakfast</h2>';
 		mealString += '	</div>';
 		mealString += '	<div class="ui-btn-right" style="right: 105px;top:10px">';
 		mealString += '		<div data-role="controlgroup" data-type="horizontal">';
@@ -317,7 +338,7 @@ $(document).on("click", "#mealtype #mealtypeList li", function(event) {
 	Load Question Page
 	Test Phase: Show Questions about Hunger
 ************/
-$(document).on("pageshow", "#question", function(event) {
+$(document).on("pagebeforeshow", "#question", function(event) {
 	
 	currentMeal = window.localStorage.getItem("currentMeal");
 	
@@ -402,37 +423,26 @@ $(document).on("click", "#question #questionList li", function(event) {
 //1. Localization with current language
 //2. Add class all elements need to be translated.
 function changeLanguage(){
-	//home page 
+	
 	$('.vHome').html(langLabel[currLang].vHome);
-	$('.vEmergency').html(langLabel[currLang].vEmergency);
 	$('.vInput').html(langLabel[currLang].vInput);
+	$('.vHelp').html(langLabel[currLang].vHelp);
 	$('.vEvaluation').html(langLabel[currLang].vEvaluation);
+	$('.vBack').html(langLabel[currLang].vBack);
+	$('.vTraining').html(langLabel[currLang].vTraining);
+	$('.vOptions').html(langLabel[currLang].vOptions);
 	$('.vGoalDay').html(langLabel[currLang].vGoalDay);
 	$('.vGoalWeek').html(langLabel[currLang].vGoalWeek);
-	$('.vTraining').html(langLabel[currLang].vTraining);
-	$('.vHelp').html(langLabel[currLang].vHelp);
-	$('.vOptions').html(langLabel[currLang].vOptions);
-
-	//option page	
-	$('.vTraining').html(langLabel[currLang].vTraining);
-	$('.vEvaluation').html(langLabel[currLang].vEvaluation);
-	$('.vOptions').html(langLabel[currLang].vOptions);
-	$('.vMedicine').html(langLabel[currLang].vMedicine);
-	$('.vBloodPressure').html(langLabel[currLang].vBloodPressure);
-	$('.vBloodSugar').html(langLabel[currLang].vBloodSugar);
+	$('.vEmergency').html(langLabel[currLang].vEmergency);
+	$('.vAmount').html(langLabel[currLang].vAmount);
 	$('.vInsulinMeasure').html(langLabel[currLang].vInsulinMeasure);
 	$('.vNeverDrinkAlc').html(langLabel[currLang].vNeverDrinkAlc);
 	$('.vLanguage').html(langLabel[currLang].vLanguage);
-	$('.vWeight').html(langLabel[currLang].vWeight);
-	$('.vNumber').html(langLabel[currLang].vNumber);
-	$('.vAmount').html(langLabel[currLang].vAmount);
-	
-	//input page
-	$('.vTraining').html(langLabel[currLang].vTraining);
-	$('.vEvaluation').html(langLabel[currLang].vEvaluation);
+	$('.vDeutsch').html(langLabel[currLang].vDeutsch);
+	$('.vEnglish').html(langLabel[currLang].vEnglish);
 	$('.vLastMeal').html(langLabel[currLang].vLastMeal);
-	$('.vLunch').html(langLabel[currLang].vLunch);
 	$('.vMeal').html(langLabel[currLang].vMeal);
+	$('.vDrink').html(langLabel[currLang].vDrink);
 	$('.vDrinking').html(langLabel[currLang].vDrinking);
 	$('.vFruit').html(langLabel[currLang].vFruit);
 	$('.vVegetable').html(langLabel[currLang].vVegetable);
@@ -443,14 +453,9 @@ function changeLanguage(){
 	$('.vInsulin').html(langLabel[currLang].vInsulin);
 	$('.vDailynote').html(langLabel[currLang].vDailynote);
 	$('.vWeight').html(langLabel[currLang].vWeight);
-	$('.vCompleteDay').html(langLabel[currLang].vCompleteDay);	
-
-	//Mean type page
-	
+	$('.vCompleteDay').html(langLabel[currLang].vCompleteDay);
+	$('.vSelectMealType').html(langLabel[currLang].vSelectMealType);
 	$('.vFastlane').html(langLabel[currLang].vFastlane);
-	$('.vLastMeal').html(langLabel[currLang].vLastMeal);
-	$('.vLunch').html(langLabel[currLang].vLunch);
-	$('.vSelectType').html(langLabel[currLang].vSelectType);
 	$('.vBBreakfast').html(langLabel[currLang].vBBreakfast);
 	$('.vBreakfast').html(langLabel[currLang].vBreakfast);
 	$('.vABreakfast').html(langLabel[currLang].vABreakfast);
@@ -459,8 +464,41 @@ function changeLanguage(){
 	$('.vDinner').html(langLabel[currLang].vDinner);
 	$('.vADinner').html(langLabel[currLang].vADinner);
 	$('.vMealHistory').html(langLabel[currLang].vMealHistory);
-	
-	//Question Page
+	$('.vWeightRecord').html(langLabel[currLang].vWeightRecord);
+	$('.vInputWeight').html(langLabel[currLang].vInputWeight);
+	$('.vRoundedTo').html(langLabel[currLang].vRoundedTo);
+	$('.vLastWeight').html(langLabel[currLang].vLastWeight);
+	$('.vNewWeight').html(langLabel[currLang].vNewWeight);
+	$('.vTable').html(langLabel[currLang].vTable);
+	$('.vChart').html(langLabel[currLang].vChart);
+	$('.vWeek').html(langLabel[currLang].vWeek);
+	$('.vMoreAThis').html(langLabel[currLang].vMoreAThis);
+	$('.vMore').html(langLabel[currLang].vMore);
+	$('.vMo').html(langLabel[currLang].vMo);
+	$('.vTu').html(langLabel[currLang].vTu);
+	$('.vWe').html(langLabel[currLang].vWe);
+	$('.vTh').html(langLabel[currLang].vTh);
+	$('.vFr').html(langLabel[currLang].vFr);
+	$('.vSa').html(langLabel[currLang].vSa);
+	$('.vSu').html(langLabel[currLang].vSu);
+	$('.vResult').html(langLabel[currLang].vResult);
+	$('.vOwnResult').html(langLabel[currLang].vOwnResult);
+	$('.vNumberProblems').html(langLabel[currLang].vNumberProblems);
+	$('.vNumberBinge').html(langLabel[currLang].vNumberBinge);
+	$('.vNumberUrges').html(langLabel[currLang].vNumberUrges);
+	$('.vPhysHung').html(langLabel[currLang].vPhysHung);
+	$('.vEnjoyFood').html(langLabel[currLang].vEnjoyFood);
+	$('.vStopFull').html(langLabel[currLang].vStopFull);
+	$('.vTextGoalWeek').html(langLabel[currLang].vTextGoalWeek);	
+	$('.vHealthyFood').html(langLabel[currLang].vHealthyFood);
+	$('.vMonday').html(langLabel[currLang].vMonday);
+	$('.vTuesday').html(langLabel[currLang].vTuesday);
+	$('.vWednesday').html(langLabel[currLang].vWednesday);
+	$('.vThursday').html(langLabel[currLang].vThursday);
+	$('.vFriday').html(langLabel[currLang].vFriday);
+	$('.vSaturday').html(langLabel[currLang].vSaturday);
+	$('.vSunday').html(langLabel[currLang].vSunday);
+	$('.vNumber').html(langLabel[currLang].vNumber);
 }
 
 
