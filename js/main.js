@@ -3,6 +3,13 @@
 var currLang = 0;
 var questionList = [];
 var mealHistoryList = [];
+var defaultDate = "15.09.2014";
+
+//Variables for Re-enter of  meal history
+var bReEnter = false;
+var indexReEnter = -1;
+
+
 
 //Cordova library ready function
 document.addEventListener("deviceready", onDeviceReady, false);
@@ -85,6 +92,8 @@ $(document).on("pagebeforeshow", "#input", function(event) {
 	
 	if((date != null) && (date != undefined) && (date != 'null')) {
 		$("#input .date").html(date);
+	}else{
+		$("#input .date").html(defaultDate);
 	}
 	
 	changeLanguage();
@@ -105,16 +114,17 @@ $(document).on("change", "#input #datePicker", function(event) {
 	yy = date.substr(6, 4);
 	date = dd + "." + mm + "." + yy;
 	
-	
-			
 	//console.log($(this).val());
 	window.localStorage.setItem("date", date);
 	$("#input .date").html(date);
 	
-	
 	if(currentDate != date) {
 		//Clear all UI data
 		$("#input input[type='checkbox']").prop( "checked", false ).checkboxradio( "refresh" );
+		//$("#mealtype input[type='radio']").prop( "checked", false ).checkboxradio( "refresh" );
+		//$("#question input[type='radio']").prop( "checked", false ).checkboxradio( "refresh" );
+		
+		
 		window.localStorage.setItem("currentMeal", "");
 		window.localStorage.setItem("lastmeal", "");
 		mealHistoryList = [];
@@ -144,7 +154,15 @@ $(document).on("pagebeforeshow", "#mealtype", function(event) {
 	
 	//show seleted date
 	date = window.localStorage.getItem("date");
-	$("#mealtype .date").html(date);
+	if((date != null) && (date != undefined) && (date != 'null')) {
+		$("#mealtype .date").html(date);
+	}else{
+		$("#mealtype .date").html(defaultDate);
+	}
+
+	//Reset re-enter variables
+	indexReEnter = -1;
+	bReEnter  = false;	
 	
 	//Decide the available meal type
 	var lastMealType = window.localStorage.getItem("lastmeal");
@@ -279,9 +297,9 @@ $(document).on("pagebeforeshow", "#mealtype", function(event) {
 		mealtype = MealTypes[mealHistory.mealtype];
 		
 		var imgSrc = "better.png";
-		if(mealHistory.status <= 2.9){
+		if(mealHistory.statusNum <= 2.9){
 			imgSrc = "bad.png"
-		}else if (mealHistory.status <= 3.9){
+		}else if (mealHistory.statusNum <= 3.9){
 			imgSrc = "good.png"
 		}else{
 			imgSrc = "better.png"
@@ -303,7 +321,7 @@ $(document).on("pagebeforeshow", "#mealtype", function(event) {
 
 $(document).on("click", "#mealtype #mealtypeList li", function(event) {
 	var className = $(this).attr("class");
-	console.log(className);	
+	
 	if($(this).hasClass("fastlane")) {
 		window.localStorage.setItem("currentMeal", MEAL_TYPE.Fastlane);
 	}
@@ -333,6 +351,14 @@ $(document).on("click", "#mealtype #mealtypeList li", function(event) {
 });
 
 
+
+//Re-Enter the status of Meal-history
+$(document).on("click", "#mealtype #mealhistoryList li", function(event) {
+	idx = $(this).index();
+	indexReEnter = idx;
+	bReEnter  = true;
+	$.mobile.changePage("#question");
+});
 
 /***********
 	Load Question Page
@@ -409,10 +435,14 @@ $(document).on("click", "#question #questionList li", function(event) {
 	
 	window.localStorage.setItem("lastmeal", currentMeal);
 	
-	mealHistoryList.push({
-		mealtype : currentMeal,
-		status : statusNum		
-	});
+	if(bReEnter == true) {
+		mealHistoryList[indexReEnter].statusNum = statusNum;
+	}else{
+		mealHistoryList.push({
+			mealtype : currentMeal,
+			statusNum : statusNum		
+		});
+	}
 	
 	$.mobile.changePage("#input");
 });
