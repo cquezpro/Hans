@@ -120,9 +120,14 @@ $(document).on("change", "#input #datePicker", function(event) {
 		//$("#mealtype input[type='radio']").prop( "checked", false ).checkboxradio( "refresh" );
 		//$("#question input[type='radio']").prop( "checked", false ).checkboxradio( "refresh" );
 		
-		
 		window.localStorage.setItem("currentMeal", "");
 		window.localStorage.setItem("lastmeal", "");
+		
+		$("#input .lastMeal").removeClass().addClass("lastMeal");
+		var className = $("#input .lastMeal").attr("class");
+		console.log(className);
+		$("#mealtype .lastMeal").removeClass().addClass(className);		
+		
 		mealHistoryList = [];
 	}
 });
@@ -318,6 +323,7 @@ $(document).on("pagebeforeshow", "#mealtype", function(event) {
 $(document).on("click", "#mealtype #mealtypeList li", function(event) {
 	var className = $(this).attr("class");
 	bReEnter  = false;
+	
 	if($(this).hasClass("fastlane")) {
 		window.localStorage.setItem("currentMeal", MEAL_TYPE.Fastlane);
 	}
@@ -438,8 +444,6 @@ $(document).on("click", "#question #questionList li", function(event) {
 	var statusNum = $(this).index() - 1;
 	currentMeal = window.localStorage.getItem("currentMeal");
 	
-	window.localStorage.setItem("lastmeal", currentMeal);
-	
 	if(bReEnter == true) {
 		mealHistoryList[indexReEnter].statusNum = statusNum;
 	}else{
@@ -447,6 +451,7 @@ $(document).on("click", "#question #questionList li", function(event) {
 			mealtype : currentMeal,
 			statusNum : statusNum		
 		});
+		window.localStorage.setItem("lastmeal", currentMeal);
 	}
 	
 	$.mobile.changePage("#input");
