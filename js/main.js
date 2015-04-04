@@ -9,8 +9,6 @@ var defaultDate = "15.09.2014";
 var bReEnter = false;
 var indexReEnter = -1;
 
-
-
 //Cordova library ready function
 document.addEventListener("deviceready", onDeviceReady, false);
 
@@ -43,8 +41,6 @@ var MOOD = {
 }
 
 //Save latest Meal type on the local storage
-
-
 
 
 //Name: onDeviceReady
@@ -371,6 +367,13 @@ $(document).on("pagebeforeshow", "#question", function(event) {
 	$("#question .currentmeal").removeClass().addClass("currentmeal");
 	$("#question .currentmeal").addClass(MealTypeClass[currentMeal]);
 
+	if(bReEnter == true) {
+		$("#question .currentmeal").removeClass().addClass("currentmeal");
+		$("#question .currentmeal").addClass(MealTypeClass[mealHistoryList[indexReEnter].mealtype]);
+		
+		$("#questionList").find("li").eq(mealHistoryList[indexReEnter].statusNum + 1).find("input[type='radio']").prop( "checked", true );
+	}
+	
 	changeLanguage();
 	$("input[type='radio']").checkboxradio();
 	$("input[type='radio']").checkboxradio("refresh");
