@@ -317,7 +317,7 @@ $(document).on("pagebeforeshow", "#mealtype", function(event) {
 
 $(document).on("click", "#mealtype #mealtypeList li", function(event) {
 	var className = $(this).attr("class");
-	
+	bReEnter  = false;
 	if($(this).hasClass("fastlane")) {
 		window.localStorage.setItem("currentMeal", MEAL_TYPE.Fastlane);
 	}
@@ -372,6 +372,8 @@ $(document).on("pagebeforeshow", "#question", function(event) {
 		$("#question .currentmeal").addClass(MealTypeClass[mealHistoryList[indexReEnter].mealtype]);
 		
 		$("#questionList").find("li").eq(mealHistoryList[indexReEnter].statusNum + 1).find("input[type='radio']").prop( "checked", true );
+	}else{
+		$("#questionList").find("li").find("input[type='radio']").prop( "checked", false );
 	}
 	
 	changeLanguage();
