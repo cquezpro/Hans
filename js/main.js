@@ -4,7 +4,7 @@ var currLang = 0;
 var questionList = [];
 var navigationList = [];
 var mealHistoryList = [];
-var defaultDate = "15.09.2014";
+var defaultDate = "15.04.2015";
 
 //Variables for Re-enter of  meal history
 var bReEnter = false;
@@ -35,6 +35,9 @@ var MEAL_TYPE = {
 var MealTypes = ["None","Fastlane","BBreakfast","Breakfast","ABreakfast","Lunch","ALunch","Dinner","ADinner"];
 
 var MealTypeClass = ["None","vFastlane","vBBreakfast","vBreakfast","vABreakfast","vLunch","vALunch","vDinner","vADinner"];
+
+var WeekClass = ["vSu", "vMo", "vTu",  "vWe",  "vTh",  "vFr",  "vSa"];
+
 
 //Define Mood status
 var MOOD = {
@@ -104,7 +107,7 @@ function showDatePicker() {
 }
 
 $(document).on("change", "#input #datePicker", function(event) {
-	//alert($(this).val());
+	console.log($(this).val());
 	var currentDate = window.localStorage.getItem("date");
 	
 	date = $(this).val();
@@ -113,9 +116,17 @@ $(document).on("change", "#input #datePicker", function(event) {
 	yy = date.substr(6, 4);
 	date = dd + "." + mm + "." + yy;
 	
-	//console.log($(this).val());
-	window.localStorage.setItem("date", date);
+	selDate =  new Date($(this).val());
+	$("#input .day").removeClass().addClass("day").addClass(WeekClass[selDate.getDay()]);
 	$("#input .date").html(date);
+	
+	$("#mealtype .day").removeClass().addClass("day").addClass(WeekClass[selDate.getDay()]);
+	$("#mealtype .date").html(date);
+	
+	$("#question .day").removeClass().addClass("day").addClass(WeekClass[selDate.getDay()]);
+	$("#question .date").html(date);
+
+	window.localStorage.setItem("date", date);
 	
 	if(currentDate != date) {
 		//Clear all UI data
@@ -133,6 +144,8 @@ $(document).on("change", "#input #datePicker", function(event) {
 		
 		mealHistoryList = [];
 	}
+	
+	changeLanguage();
 });
 
 
