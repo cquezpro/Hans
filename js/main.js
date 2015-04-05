@@ -382,6 +382,8 @@ $(document).on("pagebeforeshow", "#question", function(event) {
 		$("#questionList").find("li").find("input[type='radio']").prop( "checked", false );
 	}
 	
+	curQuestionNum = 0;
+	
 	changeLanguage();
 	$("input[type='radio']").checkboxradio();
 	$("input[type='radio']").checkboxradio("refresh");
@@ -402,33 +404,62 @@ $(document).on("pagebeforeshow", "#question", function(event) {
 			
 			if(question.A1.length < 1){
 				$("#question .A1").hide();
+			}else{
+				$("#question .A1").show();
 			}
+			
 			if(question.A2.length < 1){
 				$("#question .A2").hide();
+			}else{
+				$("#question .A2").show();
 			}
+			
 			if(question.A3.length < 1){
 				$("#question .A3").hide();
+			}else{
+				$("#question .A3").show();
 			}
+			
 			if(question.A4.length < 1){
 				$("#question .A4").hide();
+			}else{
+				$("#question .A4").show();
 			}
+			
 			if(question.A5.length < 1){
 				$("#question .A5").hide();
+			}else{
+				$("#question .A5").show();
 			}
+			
 			if(question.A6.length < 1){
 				$("#question .A6").hide();
+			}else{
+				$("#question .A6").show();
 			}
+			
 			if(question.A7.length < 1){
 				$("#question .A7").hide();
+			}else{
+				$("#question .A7").show();
 			}
+			
 			if(question.A8.length < 1){
 				$("#question .A8").hide();
+			}else{
+				$("#question .A8").show();
 			}
+			
 			if(question.A9.length < 1){
 				$("#question .A9").hide();
+			}else{
+				$("#question .A9").show();
 			}
+			
 			if(question.A10.length < 1){
 				$("#question .A10").hide();
+			}else{
+				$("#question .A10").show();
 			}
 		}
 	}	
@@ -437,24 +468,116 @@ $(document).on("pagebeforeshow", "#question", function(event) {
 	$("#mealtypeList input[type='radio']").checkboxradio("refresh");	
 });
 
+var curQuestionNum = 0;
+
 //Question Page Click Event
 //We will get the number of question.
 $(document).on("click", "#question #questionList li", function(event) {
+	
 	console.log($(this).index());
 	var statusNum = $(this).index() - 1;
 	currentMeal = window.localStorage.getItem("currentMeal");
 	
-	if(bReEnter == true) {
-		mealHistoryList[indexReEnter].statusNum = statusNum;
-	}else{
-		mealHistoryList.push({
-			mealtype : currentMeal,
-			statusNum : statusNum		
-		});
-		window.localStorage.setItem("lastmeal", currentMeal);
+	//If we choose all questions, then we need to move Input page.
+	if(curQuestionNum >= questionList.length)
+		$.mobile.changePage("#input");
+	
+	curQuestionNum++;
+	if(curQuestionNum == 1) {
+		//For now, we need to decide status with KHunger
+		if(bReEnter == true) {
+			mealHistoryList[indexReEnter].statusNum = statusNum;
+		}else{
+			mealHistoryList.push({
+				mealtype : currentMeal,
+				statusNum : statusNum		
+			});
+			window.localStorage.setItem("lastmeal", currentMeal);
+		}
 	}
 	
-	$.mobile.changePage("#input");
+	//when select of the status, we need to show other questions.
+	var question = questionList[curQuestionNum]; 
+	
+	$("#question #title").html(question.Titel);
+	$("#question .A1 h2").html(question.A1);
+	$("#question .A2 h2").html(question.A2);
+	$("#question .A3 h2").html(question.A3);
+	$("#question .A4 h2").html(question.A4);
+	$("#question .A5 h2").html(question.A5);
+	$("#question .A6 h2").html(question.A6);
+	$("#question .A7 h2").html(question.A7);
+	$("#question .A8 h2").html(question.A8);
+	$("#question .A9 h2").html(question.A9);
+	$("#question .A10 h2").html(question.A10);
+	
+	if(question.A1.length < 1){
+		$("#question .A1").hide();
+	}else{
+		$("#question .A1").show();
+	}
+	
+	if(question.A2.length < 1){
+		$("#question .A2").hide();
+	}else{
+		$("#question .A2").show();
+	}
+	
+	if(question.A3.length < 1){
+		$("#question .A3").hide();
+	}else{
+		$("#question .A3").show();
+	}
+	
+	if(question.A4.length < 1){
+		$("#question .A4").hide();
+	}else{
+		$("#question .A4").show();
+	}
+	
+	if(question.A5.length < 1){
+		$("#question .A5").hide();
+	}else{
+		$("#question .A5").show();
+	}
+	
+	if(question.A6.length < 1){
+		$("#question .A6").hide();
+	}else{
+		$("#question .A6").show();
+	}
+	
+	if(question.A7.length < 1){
+		$("#question .A7").hide();
+	}else{
+		$("#question .A7").show();
+	}
+	
+	if(question.A8.length < 1){
+		$("#question .A8").hide();
+	}else{
+		$("#question .A8").show();
+	}
+	
+	if(question.A9.length < 1){
+		$("#question .A9").hide();
+	}else{
+		$("#question .A9").show();
+	}
+	
+	if(question.A10.length < 1){
+		$("#question .A10").hide();
+	}else{
+		$("#question .A10").show();
+	}
+	
+	$("#mealtypeList input[type='radio']").checkboxradio();
+	$("#mealtypeList input[type='radio']").checkboxradio("refresh");	
+	
+	
+	curQuestionNum ++;
+	
+	
 });
 
 
