@@ -2,6 +2,7 @@
 
 var currLang = 0;
 var questionList = [];
+var navigationList = [];
 var mealHistoryList = [];
 var defaultDate = "15.09.2014";
 
@@ -15,6 +16,8 @@ document.addEventListener("deviceready", onDeviceReady, false);
 onDeviceReady();//We need to call this function directly for web version.
 
 loadQuestionJSONFile();//Load de_Questions_AB2.json file
+
+loadNavigationJSONFile();//Load NavQuestions_AA9.json file
 
 //Define Meal Type
 var MEAL_TYPE = {
@@ -474,10 +477,10 @@ var curQuestionNum = 0;
 //We will get the number of question.
 $(document).on("click", "#question #questionList li", function(event) {
 	
-	console.log($(this).index());
+	
 	var statusNum = $(this).index() - 1;
 	currentMeal = window.localStorage.getItem("currentMeal");
-	
+		
 	//If we choose all questions, then we need to move Input page.
 	if(curQuestionNum >= questionList.length)
 		$.mobile.changePage("#input");
@@ -494,6 +497,19 @@ $(document).on("click", "#question #questionList li", function(event) {
 			});
 			window.localStorage.setItem("lastmeal", currentMeal);
 		}
+	}
+	
+	var bFlag = false;
+	for(i = 0; i< navigationList.length; i++) {
+		if(navigationList[i]._FrageArt == "Radio5" && questionList[curQuestionNum]._id == navigationList[i]._Label)  {
+			bFlag = true;
+			break;
+		}
+	}
+	
+	if(bFlag == false) {
+		$("#question #questionList li").trigger("click");
+		return ;
 	}
 	
 	//when select of the status, we need to show other questions.
@@ -676,3 +692,30 @@ function loadQuestionJSONFile() {
 	});
 }
 
+/*****************
+Load Navigation JSON File
+json file path: data/NavQuestions_AA9.json
+******************/
+function loadNavigationJSONFile() {
+	$.getJSON("data/NavQuestions_AA9.json", function( data ) {
+		navigationList =  [];
+		for(i = 0;i<data.Navigation.Meal.frage.length ;i++) {
+			obj = data.Navigation.Meal.frage[i];
+			navigationList.push(obj);
+		}
+		
+		for(i = 0;i<data.Navigation.Day.frage.length ;i++) {
+			obj = data.Navigation.Day.frage[i];
+			navigationList.push(obj);
+		}		
+		
+		for(i = 0;i<data.Navigation.CloseDay.frage.length ;i++) {
+			obj = data.Navigation.CloseDay.frage[i];
+			navigationList.push(obj);	
+		}
+		
+		console.log(navigationList.length);
+		
+		//alert(questionList.length);
+	});
+}

@@ -1,0 +1,351 @@
+{
+    "Navigation": {
+        "Meal": {
+            "frage": [
+                {
+                    "_FrageArt": "Radio5",
+                    "_Label": "KHunger",
+                    "_IfNot1": "",
+                    "_GoTo1": "",
+                    "_IfNot2": "",
+                    "_GoTo2": ""
+                },
+                {
+                    "_FrageArt": "Radio5",
+                    "_Label": "NLust",
+                    "_IfNot1": "",
+                    "_GoTo1": "",
+                    "_IfNot2": "",
+                    "_GoTo2": ""
+                },
+                {
+                    "_FrageArt": "Radio5",
+                    "_Label": "Genuss",
+                    "_IfNot1": "",
+                    "_GoTo1": "",
+                    "_IfNot2": "",
+                    "_GoTo2": ""
+                },
+                {
+                    "_FrageArt": "Radio5",
+                    "_Label": "Langsam",
+                    "_IfNot1": "",
+                    "_GoTo1": "",
+                    "_IfNot2": "",
+                    "_GoTo2": ""
+                },
+                {
+                    "_FrageArt": "Radio5",
+                    "_Label": "NPortion",
+                    "_IfNot1": "",
+                    "_GoTo1": "",
+                    "_IfNot2": "",
+                    "_GoTo2": ""
+                },
+                {
+                    "_FrageArt": "Radio5",
+                    "_Label": "ASatt",
+                    "_IfNot1": "KHunger>=3 ",
+                    "_GoTo1": "next",
+                    "_IfNot2": "",
+                    "_GoTo2": ""
+                },
+                {
+                    "_FrageArt": "Radio2",
+                    "_Label": "HHunger",
+                    "_IfNot1": "KHunger<=3||Genuss<=3||Langsam<=3||NPortion<=3||ASatt<=3 ",
+                    "_GoTo1": "UrsachAusw",
+                    "_IfNot2": "",
+                    "_GoTo2": ""
+                },
+                {
+                    "_FrageArt": "Radio2+1",
+                    "_Label": "SeelHunger",
+                    "_IfNot1": "",
+                    "_GoTo1": "",
+                    "_IfNot2": "",
+                    "_GoTo2": ""
+                },
+                {
+                    "_FrageArt": "Radio2",
+                    "_Label": "EAttack",
+                    "_IfNot1": "Langsam<=2||NPortion<=2||ASatt<=2||HHunger==1||SeelHunger==1",
+                    "_GoTo1": "next",
+                    "_IfNot2": "",
+                    "_GoTo2": ""
+                },
+                {
+                    "frage": [
+                        {
+                            "_FrageArt": "OptMuti",
+                            "_Label": "Zucker",
+                            "_IfNot1": "",
+                            "_GoTo1": "",
+                            "_IfNot2": "",
+                            "_GoTo2": ""
+                        },
+                        {
+                            "_FrageArt": "OptMulti",
+                            "_Label": "KH",
+                            "_IfNot1": "",
+                            "_GoTo1": "",
+                            "_IfNot2": "",
+                            "_GoTo2": ""
+                        },
+                        {
+                            "_FrageArt": "OptMulti",
+                            "_Label": "Alk",
+                            "_IfNot1": "",
+                            "_GoTo1": "",
+                            "_IfNot2": "",
+                            "_GoTo2": ""
+                        },
+                        {
+                            "_FrageArt": "OptMulti",
+                            "_Label": "JunkFast",
+                            "_IfNot1": "",
+                            "_GoTo1": "",
+                            "_IfNot2": "",
+                            "_GoTo2": ""
+                        },
+                        {
+                            "_FrageArt": "OptMulti",
+                            "_Label": "ChemFertig",
+                            "_IfNot1": "",
+                            "_GoTo1": "",
+                            "_IfNot2": "",
+                            "_GoTo2": ""
+                        }
+                    ],
+                    "_FrageArt": "Multi",
+                    "_Label": "UrsachAusw",
+                    "_IfNot1": "HHunger==1||Eattack==1 ",
+                    "_GoTo1": "next",
+                    "_IfNot2": "",
+                    "_GoTo2": ""
+                },
+                {
+                    "_FrageArt": "Radio5",
+                    "_Label": "HManag",
+                    "_IfNot1": "KHunger<=3||HHunger==1||EAttack==1 ",
+                    "_GoTo1": "next",
+                    "_IfNot2": "",
+                    "_GoTo2": ""
+                },
+                {
+                    "_FrageArt": "Radio2",
+                    "_Label": "Versorg",
+                    "_IfNot1": "KHunger<=3||HHunger==1||EAttack==1",
+                    "_GoTo1": "next",
+                    "_IfNot2": "",
+                    "_GoTo2": ""
+                },
+                {
+                    "_FrageArt": "Radio2",
+                    "_Label": "StHunger",
+                    "_IfNot1": "HHunger==1||EAttack==1 ",
+                    "_GoTo1": "next",
+                    "_IfNot2": "KHunger>=4 ",
+                    "_GoTo2": "next"
+                },
+                {
+                    "frage": [
+                        {
+                            "_FrageArt": "OptMulti",
+                            "_Label": "Heiml",
+                            "_IfNot1": " ",
+                            "_GoTo1": "",
+                            "_IfNot2": "",
+                            "_GoTo2": ""
+                        },
+                        {
+                            "_FrageArt": "OptMulti",
+                            "_Label": "Muede",
+                            "_IfNot1": "",
+                            "_GoTo1": "",
+                            "_IfNot2": "",
+                            "_GoTo2": ""
+                        },
+                        {
+                            "_FrageArt": "OptMulti",
+                            "_Label": "SpaetEss",
+                            "_IfNot1": "",
+                            "_GoTo1": "",
+                            "_IfNot2": "",
+                            "_GoTo2": ""
+                        }
+                    ],
+                    "_FrageArt": "Multi",
+                    "_Label": "NegVerhAusw",
+                    "_IfNot1": "KHunger<=3||HHunger==1||EAttack==1",
+                    "_GoTo1": "next",
+                    "_IfNot2": "",
+                    "_GoTo2": ""
+                },
+                {
+                    "_FrageArt": "Radio2",
+                    "_Label": "EgalEffekt",
+                    "_IfNot1": "KHunger<=2||Genuss<=2||Langsam<=2||NPortion<=2||ASatt<=2 ",
+                    "_GoTo1": "next",
+                    "_IfNot2": "",
+                    "_GoTo2": ""
+                },
+                {
+                    "_FrageArt": "TextEing",
+                    "_Label": "TextMahlz",
+                    "_IfNot1": "",
+                    "_GoTo1": "",
+                    "_IfNot2": "",
+                    "_GoTo2": ""
+                }
+            ]
+        },
+        "Day": {
+            "frage": [
+                {
+                    "_FrageArt": "Anzahl",
+                    "_Label": "Trink",
+                    "_IfNot1": "",
+                    "_GoTo1": "",
+                    "_IfNot2": "",
+                    "_GoTo2": ""
+                },
+                {
+                    "_FrageArt": "Anzahl",
+                    "_Label": "Obst",
+                    "_IfNot1": "",
+                    "_GoTo1": "",
+                    "_IfNot2": "",
+                    "_GoTo2": ""
+                },
+                {
+                    "_FrageArt": "Anzahl",
+                    "_Label": "Gemuese",
+                    "_IfNot1": "",
+                    "_GoTo1": "",
+                    "_IfNot2": "",
+                    "_GoTo2": ""
+                },
+                {
+                    "_FrageArt": "Anzahl",
+                    "_Label": "Beweg",
+                    "_IfNot1": "",
+                    "_GoTo1": "",
+                    "_IfNot2": "",
+                    "_GoTo2": ""
+                },
+                {
+                    "_FrageArt": "Anzahl",
+                    "_Label": "Medik",
+                    "_IfNot1": "OptTextMedik==1",
+                    "_GoTo1": "noShow",
+                    "_IfNot2": "",
+                    "_GoTo2": ""
+                },
+                {
+                    "_FrageArt": "Anzahl",
+                    "_Label": "Blutdr",
+                    "_IfNot1": "OptTextBlutdr==1",
+                    "_GoTo1": "noShow",
+                    "_IfNot2": "",
+                    "_GoTo2": ""
+                },
+                {
+                    "_FrageArt": "Anzahl",
+                    "_Label": "Blutzucker",
+                    "_IfNot1": "OptBlutzucker==1",
+                    "_GoTo1": "noShow",
+                    "_IfNot2": "",
+                    "_GoTo2": ""
+                },
+                {
+                    "_FrageArt": "Anzahl",
+                    "_Label": "Insulin",
+                    "_IfNot1": "OptTextInsulin==1",
+                    "_GoTo1": "noShow",
+                    "_IfNot2": "",
+                    "_GoTo2": ""
+                },
+                {
+                    "_FrageArt": "TextEing",
+                    "_Label": "TagNotiz",
+                    "_IfNot1": "",
+                    "_GoTo1": "",
+                    "_IfNot2": "",
+                    "_GoTo2": ""
+                },
+                {
+                    "_FrageArt": "Spezial",
+                    "_Label": "Gewicht",
+                    "_IfNot1": "AskWeight==1",
+                    "_GoTo1": "noShow",
+                    "_IfNot2": "",
+                    "_GoTo2": ""
+                },
+                {
+                    "_FrageArt": "Spezial",
+                    "_Label": "TagAbschl",
+                    "_IfNot1": "DayOver==1",
+                    "_GoTo1": "noLink",
+                    "_IfNot2": "",
+                    "_GoTo2": ""
+                }
+            ]
+        },
+        "CloseDay": {
+            "frage": [
+                {
+                    "frage": [
+                        {
+                            "_FrageArt": "SubMatrix",
+                            "_Label": "Ausgewogen",
+                            "_IfNot1": " ",
+                            "_GoTo1": "",
+                            "_IfNot2": "",
+                            "_GoTo2": ""
+                        },
+                        {
+                            "_FrageArt": "SubMatrix",
+                            "_Label": "DiabOK",
+                            "_IfNot1": " ",
+                            "_GoTo1": "",
+                            "_IfNot2": "",
+                            "_GoTo2": ""
+                        },
+                        {
+                            "_FrageArt": "SubMatrix",
+                            "_Label": "ZielePers",
+                            "_IfNot1": " ",
+                            "_GoTo1": "",
+                            "_IfNot2": "",
+                            "_GoTo2": ""
+                        }
+                    ],
+                    "_FrageArt": "MatrixRadio",
+                    "_Label": "TagMatrix",
+                    "_IfNot1": "",
+                    "_GoTo1": "",
+                    "_IfNot2": "",
+                    "_GoTo2": ""
+                },
+                {
+                    "_FrageArt": "Radio5",
+                    "_Label": "BewertEigen",
+                    "_IfNot1": " ",
+                    "_GoTo1": "",
+                    "_IfNot2": "",
+                    "_GoTo2": ""
+                },
+                {
+                    "_FrageArt": "TextAusg",
+                    "_Label": "AchtungTag",
+                    "_IfNot1": "",
+                    "_GoTo1": "",
+                    "_IfNot2": "",
+                    "_GoTo2": ""
+                }
+            ]
+        },
+        "__text": "\n  V1_2\n  \n\n  \n\n  \n\n  \n\n"
+    }
+}
