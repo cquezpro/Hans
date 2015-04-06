@@ -490,8 +490,8 @@ var curQuestionNum = 0;
 //We will get the number of question.
 $(document).on("click", "#question #questionList li", function(event) {
 	
-	
-	var statusNum = $(this).index() - 1;
+	$("#question input[type='radio']").prop( "checked", false ).checkboxradio( "refresh" );
+	var statusNum = $(this).index() + 1;
 	currentMeal = window.localStorage.getItem("currentMeal");
 		
 	//If we choose all questions, then we need to move Input page.
@@ -499,6 +499,7 @@ $(document).on("click", "#question #questionList li", function(event) {
 		$.mobile.changePage("#input");
 	
 	curQuestionNum++;
+	
 	if(curQuestionNum == 1) {
 		//For now, we need to decide status with KHunger
 		if(bReEnter == true) {
@@ -602,10 +603,6 @@ $(document).on("click", "#question #questionList li", function(event) {
 	
 	$("#mealtypeList input[type='radio']").checkboxradio();
 	$("#mealtypeList input[type='radio']").checkboxradio("refresh");	
-	
-	
-	curQuestionNum ++;
-	
 	
 });
 
