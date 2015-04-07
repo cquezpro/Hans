@@ -103,6 +103,11 @@ $(document).on("pagebeforeshow", "#input", function(event) {
 
 //Show date picker control to change date.
 function showDatePicker() {
+	if(currLang == 0)
+		$("#datepicker").datepicker($.datepicker.regional["es"]);
+	else
+		$("#datepicker").datepicker($.datepicker.regional["de"]);
+	
 	$("#datePicker").datepicker("show");
 }
 
@@ -111,9 +116,13 @@ $(document).on("change", "#input #datePicker", function(event) {
 	var currentDate = window.localStorage.getItem("date");
 	
 	date = $(this).val();
-	dd = date.substr(3, 2);
+	/*dd = date.substr(3, 2);
 	mm = date.substr(0, 2);
 	yy = date.substr(6, 4);
+	*/
+	yy=date.substr(0,4);
+	mm=date.substr(5,2);
+	dd=date.substr(8,2);
 	date = dd + "." + mm + "." + yy;
 	
 	selDate =  new Date($(this).val());
@@ -314,9 +323,9 @@ $(document).on("pagebeforeshow", "#mealtype", function(event) {
 		mealtype = MealTypes[mealHistory.mealtype];
 		
 		var imgSrc = "better.png";
-		if(mealHistory.statusNum <= 2.9){
+		if(mealHistory.statusNum[0] <= 2.9){
 			imgSrc = "bad.png"
-		}else if (mealHistory.statusNum <= 3.9){
+		}else if (mealHistory.statusNum[0] <= 3.9){
 			imgSrc = "good.png"
 		}else{
 			imgSrc = "better.png"
@@ -378,31 +387,28 @@ $(document).on("click", "#mealtype #mealhistoryList li", function(event) {
 	$.mobile.changePage("#question");
 });
 
+var reEnterNum = 0;
 /***********
 	Load Question Page
 	Test Phase: Show Questions about Hunger
 ************/
 $(document).on("pagebeforeshow", "#question", function(event) {
-	
+	curQuestionNum = 1;
 	currentMeal = window.localStorage.getItem("currentMeal");
 	
 	$("#question .currentmeal").removeClass().addClass("currentmeal");
 	$("#question .currentmeal").addClass(MealTypeClass[currentMeal]);
 
 	if(bReEnter == true) {
+		reEnterNum = 0;
 		$("#question .currentmeal").removeClass().addClass("currentmeal");
 		$("#question .currentmeal").addClass(MealTypeClass[mealHistoryList[indexReEnter].mealtype]);
 		
-		$("#questionList").find("li").eq(mealHistoryList[indexReEnter].statusNum + 1).find("input[type='radio']").prop( "checked", true );
+		$("#questionList").find("li").eq(mealHistoryList[indexReEnter].statusNum[0] - 1).find("input[type='radio']").prop( "checked", true );
 	}else{
 		$("#questionList").find("li").find("input[type='radio']").prop( "checked", false );
 	}
 	
-	curQuestionNum = 0;
-	
-	changeLanguage();
-	$("input[type='radio']").checkboxradio();
-	$("input[type='radio']").checkboxradio("refresh");
 	for(var i=0;i<questionList.length;i++) {
 		var question = questionList[i]; 
 		if(question._id == "KHunger") {
@@ -482,128 +488,175 @@ $(document).on("pagebeforeshow", "#question", function(event) {
 	
 	$("#mealtypeList input[type='radio']").checkboxradio();
 	$("#mealtypeList input[type='radio']").checkboxradio("refresh");	
+	
+	changeLanguage();
 });
 
 var curQuestionNum = 0;
+var statusNumList = [];
 
 //Question Page Click Event
 //We will get the number of question.
-$(document).on("click", "#question #questionList li", function(event) {
-	
-	$("#question input[type='radio']").prop( "checked", false ).checkboxradio( "refresh" );
+$(document).on("click", "#question #questionList li", function(event) {	
+	//$("#question input[type='radio']").prop( "checked", false ).checkboxradio( "refresh" );
 	var statusNum = $(this).index() + 1;
 	currentMeal = window.localStorage.getItem("currentMeal");
-		
-	//If we choose all questions, then we need to move Input page.
-	if(curQuestionNum >= questionList.length)
-		$.mobile.changePage("#input");
+	var bFlag = false;	
 	
-	curQuestionNum++;
+	//If we choose all questions, then we need to move Input page.
+	if(curQuestionNum >= questionList.length) {
+		$.mobile.changePage("#input");
+		//curQuestionNum = 0;
+		return false;			
+	}
 	
 	if(curQuestionNum == 1) {
+		statusNumList = [];
 		//For now, we need to decide status with KHunger
 		if(bReEnter == true) {
-			mealHistoryList[indexReEnter].statusNum = statusNum;
+			//mealHistoryList[indexReEnter].statusNum = statusNum;
 		}else{
+			
 			mealHistoryList.push({
 				mealtype : currentMeal,
-				statusNum : statusNum		
+				statusNum : statusNumList		
 			});
 			window.localStorage.setItem("lastmeal", currentMeal);
 		}
 	}
+	if(bReEnter == false && curQuestionNum > 0) {
+		statusNumList.push(statusNum);
+		mealHistoryList[mealHistoryList.length-1].statusNum = statusNumList;
+	}	
 	
-	var bFlag = false;
+	
+	
+	bFlag = false;
 	for(i = 0; i< navigationList.length; i++) {
+			
 		if(navigationList[i]._FrageArt == "Radio5" && questionList[curQuestionNum]._id == navigationList[i]._Label)  {
 			bFlag = true;
 			break;
 		}
 	}
+
+	if(bFlag === false) {
 	
-	if(bFlag == false) {
-		$("#question #questionList li").trigger("click");
-		return ;
+		do {
+			
+			if(curQuestionNum >= questionList.length) {
+				$.mobile.changePage("#input");
+				curQuestionNum = 0;
+				return false;			
+				break;
+			}
+			console.log(curQuestionNum);
+			for(i = 0; i< navigationList.length; i++) {
+				if(navigationList[i]._FrageArt == "Radio5" && questionList[curQuestionNum]._id == navigationList[i]._Label)  {
+					bFlag = true;
+					break;
+				}
+			}
+			
+			if(bFlag == true)
+				break;
+			
+			curQuestionNum++;
+		}while(1);
+		
+	}
+
+	
+	if(bFlag == true) {
+		
+		//when select of the status, we need to show other questions.
+		var question = questionList[curQuestionNum]; 
+		
+		$("#question #title").html(question.Titel);
+		$("#question .A1 h2").html(question.A1);
+		$("#question .A2 h2").html(question.A2);
+		$("#question .A3 h2").html(question.A3);
+		$("#question .A4 h2").html(question.A4);
+		$("#question .A5 h2").html(question.A5);
+		$("#question .A6 h2").html(question.A6);
+		$("#question .A7 h2").html(question.A7);
+		$("#question .A8 h2").html(question.A8);
+		$("#question .A9 h2").html(question.A9);
+		$("#question .A10 h2").html(question.A10);
+		
+		if(question.A1.length < 1){
+			$("#question .A1").hide();
+		}else{
+			$("#question .A1").show();
+		}
+		
+		if(question.A2.length < 1){
+			$("#question .A2").hide();
+		}else{
+			$("#question .A2").show();
+		}
+		
+		if(question.A3.length < 1){
+			$("#question .A3").hide();
+		}else{
+			$("#question .A3").show();
+		}
+		
+		if(question.A4.length < 1){
+			$("#question .A4").hide();
+		}else{
+			$("#question .A4").show();
+		}
+		
+		if(question.A5.length < 1){
+			$("#question .A5").hide();
+		}else{
+			$("#question .A5").show();
+		}
+		
+		if(question.A6.length < 1){
+			$("#question .A6").hide();
+		}else{
+			$("#question .A6").show();
+		}
+		
+		if(question.A7.length < 1){
+			$("#question .A7").hide();
+		}else{
+			$("#question .A7").show();
+		}
+		
+		if(question.A8.length < 1){
+			$("#question .A8").hide();
+		}else{
+			$("#question .A8").show();
+		}
+		
+		if(question.A9.length < 1){
+			$("#question .A9").hide();
+		}else{
+			$("#question .A9").show();
+		}
+		
+		if(question.A10.length < 1){
+			$("#question .A10").hide();
+		}else{
+			$("#question .A10").show();
+		}		
 	}
 	
-	//when select of the status, we need to show other questions.
-	var question = questionList[curQuestionNum]; 
-	
-	$("#question #title").html(question.Titel);
-	$("#question .A1 h2").html(question.A1);
-	$("#question .A2 h2").html(question.A2);
-	$("#question .A3 h2").html(question.A3);
-	$("#question .A4 h2").html(question.A4);
-	$("#question .A5 h2").html(question.A5);
-	$("#question .A6 h2").html(question.A6);
-	$("#question .A7 h2").html(question.A7);
-	$("#question .A8 h2").html(question.A8);
-	$("#question .A9 h2").html(question.A9);
-	$("#question .A10 h2").html(question.A10);
-	
-	if(question.A1.length < 1){
-		$("#question .A1").hide();
+	if(bReEnter == true) {
+		$("#questionList").find("li").eq(mealHistoryList[indexReEnter].statusNum[reEnterNum + 1] - 1).find("input[type='radio']").prop( "checked", true ).checkboxradio("refresh");
+		
+		mealHistoryList[indexReEnter].statusNum[reEnterNum] = statusNum;
 	}else{
-		$("#question .A1").show();
+		$("#question input[type='radio']").prop( "checked", false ).checkboxradio( "refresh" );
 	}
 	
-	if(question.A2.length < 1){
-		$("#question .A2").hide();
-	}else{
-		$("#question .A2").show();
-	}
-	
-	if(question.A3.length < 1){
-		$("#question .A3").hide();
-	}else{
-		$("#question .A3").show();
-	}
-	
-	if(question.A4.length < 1){
-		$("#question .A4").hide();
-	}else{
-		$("#question .A4").show();
-	}
-	
-	if(question.A5.length < 1){
-		$("#question .A5").hide();
-	}else{
-		$("#question .A5").show();
-	}
-	
-	if(question.A6.length < 1){
-		$("#question .A6").hide();
-	}else{
-		$("#question .A6").show();
-	}
-	
-	if(question.A7.length < 1){
-		$("#question .A7").hide();
-	}else{
-		$("#question .A7").show();
-	}
-	
-	if(question.A8.length < 1){
-		$("#question .A8").hide();
-	}else{
-		$("#question .A8").show();
-	}
-	
-	if(question.A9.length < 1){
-		$("#question .A9").hide();
-	}else{
-		$("#question .A9").show();
-	}
-	
-	if(question.A10.length < 1){
-		$("#question .A10").hide();
-	}else{
-		$("#question .A10").show();
-	}
-	
-	$("#mealtypeList input[type='radio']").checkboxradio();
-	$("#mealtypeList input[type='radio']").checkboxradio("refresh");	
-	
+	reEnterNum ++;
+
+	curQuestionNum++;
+
 });
 
 
@@ -612,6 +665,7 @@ $(document).on("click", "#question #questionList li", function(event) {
 //1. Localization with current language
 //2. Add class all elements need to be translated.
 function changeLanguage(){
+	$("#datepicker").datepicker($.datepicker.regional["de"]);
 	
 	$('.vHome').html(langLabel[currLang].vHome);
 	$('.vInput').html(langLabel[currLang].vInput);
